@@ -9,16 +9,21 @@ This class provides a simple info box that will help you monitor your code perfo
 ### How to use
 
 	var stats = new Stats();
-	container.appendChild( stats.getDisplayElement() ); // container is a DOM Element
+	dom_element.appendChild( stats.getDisplayElement() );
 	
 	setInterval(loop, 1000/60);
 	
 	function loop()
 	{
-		stats.tick();
+		stats.update();
 	}
 
 ### Change Log
+
+2010 03 01 - v**1.2**
+
+* Simplified
+
 
 2010 02 21 - v**1.1**
 
