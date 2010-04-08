@@ -4,7 +4,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Screenshot
 
-![stats_js.png](http://mrdoob.googlecode.com/svn/trunk/assets/stats_js.png)
+![stats_js.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js.png)
 
 ### How to use
 
