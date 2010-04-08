@@ -1,6 +1,6 @@
 /*
  * stats.js 1.2
- * http://code.google.com/p/mrdoob/wiki/stats_js
+ * http://github.com/mrdoob/stats.js
  *
  * Released under MIT license:
  * http://www.opensource.org/licenses/mit-license.php
