@@ -32,7 +32,7 @@ function Stats()
 
 Stats.prototype =
 {
-	init: function()
+	init: function ()
 	{
 		this.frames = 0;
 		this.framesMin = 1000;
@@ -67,25 +67,25 @@ Stats.prototype =
 			
 		this.context = this.canvas.getContext("2d");
 		this.context.fillStyle = '#101030';
-		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height );
+		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 	
 		this.contextImageData = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
 	},
 
-	getDisplayElement: function()
+	getDisplayElement: function ()
 	{
 		return this.container;
 	},
 	
-	update: function()
+	update: function ()
 	{
-		this.frames++
+		this.frames ++;
 
 		this.time = new Date().getTime();
 
 		if (this.time >= this.timePrev + 1000)
 		{
-			this.fps = Math.round((this.frames * 1000 ) / (this.time - this.timePrev));
+			this.fps = Math.round((this.frames * 1000) / (this.time - this.timePrev));
 
 			this.framesMin = Math.min(this.framesMin, this.fps);
 			this.framesMax = Math.max(this.framesMax, this.fps);
@@ -98,7 +98,7 @@ Stats.prototype =
 			this.context.fillStyle = '#101030';
 			this.context.fillRect(this.canvas.width - 1, 0, 1, 30);
 		
-			this.index = ( Math.floor(30 - Math.min(30, (this.fps / 60) * 30)) );
+			this.index = (Math.floor(30 - Math.min(30, (this.fps / 60) * 30)));
 
 			this.context.fillStyle = '#80ffff';
 			this.context.fillRect(this.canvas.width - 1, this.index, 1, 1);
@@ -110,4 +110,4 @@ Stats.prototype =
 			this.frames = 0;
 		}
 	}
-}
+};
