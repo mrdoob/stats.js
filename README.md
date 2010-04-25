@@ -1,12 +1,17 @@
+stats.js
+========
+
+#### Javascript Performance Monitor ####
+
 This class provides a simple info box that will help you monitor your code performance.
 
 * **FPS** Frames per second, how many frames were rendered in 1 second. The higher the number, the better.
 
-### Screenshot
+### Screenshot ###
 
 ![stats_js.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js.png)
 
-### How to use
+### How to use ###
 
 	var stats = new Stats();
 	dom_element.appendChild( stats.getDisplayElement() );
@@ -18,7 +23,7 @@ This class provides a simple info box that will help you monitor your code perfo
 		stats.update();
 	}
 
-### Change Log
+### Change Log ###
 
 2010 03 01 - v**1.2**
 
