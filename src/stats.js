@@ -43,8 +43,8 @@ Stats.prototype =
 	
 		this.container = document.createElement("div");
 		this.container.style.position = 'absolute';
-		this.container.style.fontFamily = 'Arial';
-		this.container.style.fontSize = '10px';
+		this.container.style.fontFamily = 'Helvetica, Arial, sans-serif';
+		this.container.style.fontSize = '9px';
 		this.container.style.backgroundColor = '#000020';
 		this.container.style.opacity = '0.9';
 		this.container.style.width = '80px';
