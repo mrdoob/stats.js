@@ -13,7 +13,7 @@ This class provides a simple info box that will help you monitor your code perfo
 ### How to use ###
 
 	var stats = new Stats();
-	parentElement.appendChild(stats.getDOMElement());
+	parentElement.appendChild(stats.domElement);
 
 	setInterval(function () {
 		stats.update();
@@ -22,12 +22,10 @@ This class provides a simple info box that will help you monitor your code perfo
 Aligning the panel on the top-left corner can be done like this:
 
 	var stats = new Stats();
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.top = '0px';
 
-	var statsDOM = stats.getDOMElement();
-	statsDOM.style.position = 'absolute';
-	statsDOM.getDOMElement().style.top = '0px';
-
-	parentElement.appendChild(statsDOM);
+	parentElement.appendChild(stats.domElement);
 
 	setInterval(function () {
 		stats.update();

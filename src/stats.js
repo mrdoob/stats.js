@@ -8,7 +8,7 @@
  * How to use:
  *
  *  var stats = new Stats();
- *  parentElement.appendChild(stats.getDOMElement());
+ *  parentElement.appendChild(stats.domElement);
  *
  *  setInterval(loop, 1000/60);
  *
@@ -61,11 +61,7 @@ var Stats = function () {
 	
 	return {
 		
-		getDOMElement: function () {
-			
-			return container;
-			
-		},
+		domElement: container,
 		
 		update: function () {
 
