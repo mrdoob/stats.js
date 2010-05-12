@@ -13,27 +13,44 @@ This class provides a simple info box that will help you monitor your code perfo
 ### How to use ###
 
 	var stats = new Stats();
-	dom_element.appendChild( stats.getDisplayElement() );
-	
-	setInterval(loop, 1000/60);
-	
-	function loop()
-	{
+	parentElement.appendChild(stats.getDOMElement());
+
+	setInterval(function () {
 		stats.update();
-	}
+	}, 1000/60);
+
+Aligning the panel on the top-left corner can be done like this:
+
+	var stats = new Stats();
+
+	var statsDOM = stats.getDOMElement();
+	statsDOM.style.position = 'absolute';
+	statsDOM.getDOMElement().style.top = '0px';
+
+	parentElement.appendChild(statsDOM);
+
+	setInterval(function () {
+		stats.update();
+	}, 1000/60);
 
 ### Change Log ###
 
-2010 03 01 - v**1.2**
+2010 05 12 - **r3**
 
-* Simplified
+* Switched to parasitic inheritance.
+* Removed position = 'absolute'
 
 
-2010 02 21 - v**1.1**
+2010 03 01 - **r2**
+
+* Simplified.
+
+
+2010 02 21 - **r1**
 
 * Accurate FPS calculation (thx Spite!)
 
  
-2009 08 09 - v**1.0**
+2009 08 09 - **r0**
 
 * Base code
