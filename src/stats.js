@@ -1,5 +1,5 @@
 /*
- * stats.js r4
+ * stats.js r3
  * http://github.com/mrdoob/stats.js
  *
  * Released under MIT license:
@@ -89,7 +89,7 @@ var Stats = function () {
 				context.fillStyle = '#101030';
 				context.fillRect(canvas.width - 1, 0, 1, 30);
 		
-				index = (Math.floor(30 - Math.min(30, (fps / 60) * 30)));
+				index = Math.floor(30 - Math.min(30, (fps / 60) * 30));
 
 				context.fillStyle = '#80ffff';
 				context.fillRect(canvas.width - 1, index, 1, 1);
