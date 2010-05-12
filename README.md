@@ -35,7 +35,7 @@ Aligning the panel on the top-left corner can be done like this:
 
 2010 05 12 - **r3** (1.241 kb)
 
-* Switched to parasitic inheritance.
+* Switched to module pattern code style.
 * Removed position = 'absolute'
 
 
