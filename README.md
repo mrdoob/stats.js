@@ -33,13 +33,13 @@ Aligning the panel on the top-left corner can be done like this:
 
 ### Change Log ###
 
-2010 05 12 - **r3**
+2010 05 12 - **r3** (1.241 kb)
 
-* Switched to parasitic inheritance.
+* Switched to module pattern code style.
 * Removed position = 'absolute'
 
 
-2010 03 01 - **r2**
+2010 03 01 - **r2** (2.177 kb)
 
 * Simplified.
 
