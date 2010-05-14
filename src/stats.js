@@ -20,81 +20,81 @@
 
 var Stats = function () {
 
-	var frames, framesMin, framesMax, time, timePrev, container,
-	text, canvas, context, imageData;
+	var _frames, _framesMin, _framesMax, _time, _timePrev,
+	_container, _text, _canvas, _context, _imageData;
 	
-	frames = 0;
-	framesMin = 1000;
-	framesMax = 0;
+	_frames = 0;
+	_framesMin = 1000;
+	_framesMax = 0;
 	
-	time = new Date().getTime();
-	timePrev = time;
+	_time = new Date().getTime();
+	_timePrev = _time;
 	
-	container = document.createElement('div');
-	container.style.fontFamily = 'Helvetica, Arial, sans-serif';
-	container.style.fontSize = '9px';
-	container.style.backgroundColor = '#000020';
-	container.style.opacity = '0.9';
-	container.style.width = '80px';
-	container.style.paddingTop = '2px';
+	_container = document.createElement('div');
+	_container.style.fontFamily = 'Helvetica, Arial, sans-serif';
+	_container.style.fontSize = '9px';
+	_container.style.backgroundColor = '#000020';
+	_container.style.opacity = '0.9';
+	_container.style.width = '80px';
+	_container.style.paddingTop = '2px';
 	
-	text = document.createElement('div');
-	text.style.color = '#00ffff';
-	text.style.marginLeft = '3px';
-	text.style.marginBottom = '3px';
-	text.innerHTML = '<strong>FPS</strong>';
-	container.appendChild(text);
+	_text = document.createElement('div');
+	_text.style.color = '#00ffff';
+	_text.style.marginLeft = '3px';
+	_text.style.marginBottom = '3px';
+	_text.innerHTML = '<strong>FPS</strong>';
+	_container.appendChild(_text);
 
-	canvas = document.createElement('canvas');
-	canvas.width = 74;
-	canvas.height = 30;
-	canvas.style.display = 'block';
-	canvas.style.marginLeft = '3px';
-	canvas.style.marginBottom = '3px';
-	container.appendChild(canvas);
+	_canvas = document.createElement('canvas');
+	_canvas.width = 74;
+	_canvas.height = 30;
+	_canvas.style.display = 'block';
+	_canvas.style.marginLeft = '3px';
+	_canvas.style.marginBottom = '3px';
+	_container.appendChild(_canvas);
 		
-	context = canvas.getContext('2d');
-	context.fillStyle = '#101030';
-	context.fillRect(0, 0, canvas.width, canvas.height);
+	_context = _canvas.getContext('2d');
+	_context.fillStyle = '#101030';
+	_context.fillRect(0, 0, _canvas.width, _canvas.height);
 
-	imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+	_imageData = _context.getImageData(0, 0, _canvas.width, _canvas.height);
 	
 	return {
 		
-		domElement: container,
+		domElement: _container,
 		
 		update: function () {
 
 			var fps, index;
 
-			time = new Date().getTime();
-			frames += 1;
+			_time = new Date().getTime();
+			_frames += 1;
 
-			if (time >= timePrev + 1000) {
+			if (_time >= _timePrev + 1000) {
 			
-				fps = Math.round((frames * 1000) / (time - timePrev));
+				fps = Math.round((_frames * 1000) / (_time - _timePrev));
 
-				framesMin = Math.min(framesMin, fps);
-				framesMax = Math.max(framesMax, fps);
+				_framesMin = Math.min(_framesMin, fps);
+				_framesMax = Math.max(_framesMax, fps);
 	
-				text.innerHTML = '<strong>' + fps + ' FPS</strong> (' + framesMin + '-' + framesMax + ')';
+				_text.innerHTML = '<strong>' + fps + ' FPS</strong> (' + _framesMin + '-' + _framesMax + ')';
 	
-				imageData = context.getImageData(1, 0, canvas.width - 1, 30);
-				context.putImageData(imageData, 0, 0);
+				_imageData = context.getImageData(1, 0, _canvas.width - 1, 30);
+				_context.putImageData(_imageData, 0, 0);
 		
-				context.fillStyle = '#101030';
-				context.fillRect(canvas.width - 1, 0, 1, 30);
+				_context.fillStyle = '#101030';
+				_context.fillRect(_canvas.width - 1, 0, 1, 30);
 		
 				index = Math.floor(30 - Math.min(30, (fps / 60) * 30));
 
-				context.fillStyle = '#80ffff';
-				context.fillRect(canvas.width - 1, index, 1, 1);
+				_context.fillStyle = '#80ffff';
+				_context.fillRect(_canvas.width - 1, index, 1, 1);
 
-				context.fillStyle = '#00ffff';
-				context.fillRect(canvas.width - 1, index + 1, 1, 30 - index);
+				_context.fillStyle = '#00ffff';
+				_context.fillRect(_canvas.width - 1, index + 1, 1, 30 - index);
 
-				timePrev = time;
-				frames = 0;
+				_timePrev = _time;
+				_frames = 0;
 			}
 		}
 	};
