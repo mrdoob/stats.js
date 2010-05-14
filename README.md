@@ -33,7 +33,7 @@ Aligning the panel on the top-left corner can be done like this:
 
 ### Change Log ###
 
-2010 05 12 - **r3** (1.241 kb)
+2010 05 12 - **r3** (1.247 kb)
 
 * Switched to module pattern code style.
 * Removed position = 'absolute'
