@@ -79,7 +79,7 @@ var Stats = function () {
 	
 				_text.innerHTML = '<strong>' + fps + ' FPS</strong> (' + _framesMin + '-' + _framesMax + ')';
 	
-				_imageData = context.getImageData(1, 0, _canvas.width - 1, 30);
+				_imageData = _context.getImageData(1, 0, _canvas.width - 1, 30);
 				_context.putImageData(_imageData, 0, 0);
 		
 				_context.fillStyle = '#101030';
