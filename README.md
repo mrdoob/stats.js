@@ -3,6 +3,8 @@ stats.js
 
 #### Javascript Performance Monitor ####
 
+[![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png)](http://flattr.com/thing/1993/stats-js)
+
 ![stats_js.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js.png)
 
 This class provides a simple info box that will help you monitor your code performance.
