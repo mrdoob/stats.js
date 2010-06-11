@@ -129,8 +129,8 @@ var Stats = function () {
 
 				_fpsText.style.display = 'none';
 				_fpsCanvas.style.display = 'none';
-				_msText.style.display = 'inline';
-				_msCanvas.style.display = 'inline';
+				_msText.style.display = 'block';
+				_msCanvas.style.display = 'block';
 
 				break;
 
@@ -138,8 +138,8 @@ var Stats = function () {
 
 				_mode = 'fps';
 
-				_fpsText.style.display = 'inline';
-				_fpsCanvas.style.display = 'inline';
+				_fpsText.style.display = 'block';
+				_fpsCanvas.style.display = 'block';
 				_msText.style.display = 'none';
 				_msCanvas.style.display = 'none';
 
