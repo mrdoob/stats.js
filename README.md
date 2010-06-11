@@ -5,23 +5,27 @@ stats.js
 
 [![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png)](http://flattr.com/thing/1993/stats-js)
 
-![stats_js.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js.png)
-
 This class provides a simple info box that will help you monitor your code performance.
 
-* **FPS** Frames per second, how many frames were rendered in 1 second. The higher the number, the better.
+* **FPS** Frames per second, how many frames were rendered in 1 second. The higher the number the better.
+* **MS** Milliseconds needed to render a frame. The lower the number the better.
 
+### Screenshots ###
 
-### How to use ###
+![stats_js.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js.png)
+
+### Usage ###
 
 	var stats = new Stats();
 	parentElement.appendChild(stats.domElement);
 
 	setInterval(function () {
+	
 		stats.update();
+	
 	}, 1000/60);
 
-Aligning the panel on the top-left corner can be done like this:
+Aligning the panel to the top-left corner:
 
 	var stats = new Stats();
 	stats.domElement.style.position = 'absolute';
@@ -30,10 +34,17 @@ Aligning the panel on the top-left corner can be done like this:
 	parentElement.appendChild(stats.domElement);
 
 	setInterval(function () {
+	
 		stats.update();
+	
 	}, 1000/60);
 
 ### Change Log ###
+
+2010 06 11 - **r4** (2.235 kb)
+
+* Added MS view (click to swap views)
+
 
 2010 05 12 - **r3** (1.241 kb)
 
