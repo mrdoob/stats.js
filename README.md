@@ -10,9 +10,9 @@ This class provides a simple info box that will help you monitor your code perfo
 * **FPS** Frames per second, how many frames were rendered in 1 second. The higher the number the better.
 * **MS** Milliseconds needed to render a frame. The lower the number the better.
 
-### Screenshot ###
+### Screenshots ###
 
-![stats_js.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js.png)
+![stats_js_fps.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js_fps.png) ![stats_js_ms.png](http://github.com/mrdoob/stats.js/raw/master/assets/stats_js_ms.png)
 
 ### Usage ###
 
