@@ -52,7 +52,7 @@ var Stats = function () {
 
 	_fpsContext = _fpsCanvas.getContext( '2d' );
 	_fpsContext.fillStyle = '#101030';
-	_fpsContext.fillRect(0, 0, _fpsCanvas.width, _fpsCanvas.height);
+	_fpsContext.fillRect( 0, 0, _fpsCanvas.width, _fpsCanvas.height );
 
 	_fpsImageData = _fpsContext.getImageData( 0, 0, _fpsCanvas.width, _fpsCanvas.height );
 
@@ -75,7 +75,7 @@ var Stats = function () {
 
 	_msContext = _msCanvas.getContext( '2d' );
 	_msContext.fillStyle = '#101030';
-	_msContext.fillRect(0, 0, _msCanvas.width, _msCanvas.height);
+	_msContext.fillRect( 0, 0, _msCanvas.width, _msCanvas.height );
 
 	_msImageData = _msContext.getImageData( 0, 0, _msCanvas.width, _msCanvas.height );
 
@@ -160,8 +160,8 @@ var Stats = function () {
 			_time = new Date().getTime();
 
 			_ms = _time - _timeLastFrame;
-			_msMin = Math.min(_msMin, _ms);
-			_msMax = Math.max(_msMax, _ms);
+			_msMin = Math.min( _msMin, _ms );
+			_msMax = Math.max( _msMax, _ms );
 
 			updateGraph( _msImageData.data, Math.min( 30, 30 - ( _ms / 200 ) * 30 ) );
 
@@ -172,9 +172,9 @@ var Stats = function () {
 
 			if ( _time > _timeLastSecond + 1000 ) {
 
-				_fps = Math.round((_frames * 1000) / (_time - _timeLastSecond));
-				_fpsMin = Math.min(_fpsMin, _fps);
-				_fpsMax = Math.max(_fpsMax, _fps);
+				_fps = Math.round( ( _frames * 1000) / ( _time - _timeLastSecond ) );
+				_fpsMin = Math.min( _fpsMin, _fps );
+				_fpsMax = Math.max( _fpsMax, _fps );
 
 				updateGraph( _fpsImageData.data, Math.min( 30, 30 - ( _fps / 100 ) * 30 ) );
 
