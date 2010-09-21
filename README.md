@@ -43,10 +43,11 @@ Aligning the panel to the top-left corner:
 
 ### Change Log ###
 
-2010 09 21 - **r5** (3.775 kb)
+2010 09 21 - **r5** (3.800 kb)
 
 * Different color per mode.
 * Added MEM mode. (Chrome only)
+* Force text left aligned.
 
 
 2010 06 11 - **r4** (2.235 kb)

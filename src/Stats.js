@@ -42,6 +42,7 @@ var Stats = function () {
 
 	_container = document.createElement( 'div' );
 	_container.style.fontFamily = 'Helvetica, Arial, sans-serif';
+	_container.style.textAlign = 'left';
 	_container.style.fontSize = '9px';
 	_container.style.opacity = '0.9';
 	_container.style.width = '80px';
