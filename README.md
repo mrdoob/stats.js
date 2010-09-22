@@ -9,7 +9,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 * **FPS** Frames rendered in the last second. The higher the number the better.
 * **MS** Milliseconds needed to render a frame. The lower the number the better.
-* **MEM** Mbytes of memory allocated. Make sure it doesn't keep incrementing. (Chrome only, --enable-memory-info flag required)
+* **MEM** Mbytes of memory allocated. Make sure it doesn't keep incrementing. (Webkit-based browsers only)
 
 ### Screenshots ###
 
@@ -18,35 +18,36 @@ This class provides a simple info box that will help you monitor your code perfo
 ### Usage ###
 
 	var stats = new Stats();
-	parentElement.appendChild(stats.domElement);
 
-	setInterval(function () {
-
-		stats.update();
-
-	}, 1000/60);
-
-Aligning the panel to the top-left corner:
-
-	var stats = new Stats();
+	// Align top-left
 	stats.domElement.style.position = 'absolute';
 	stats.domElement.style.left = '0px';
 	stats.domElement.style.top = '0px';
 
-	parentElement.appendChild(stats.domElement);
+	parentElement.appendChild( stats.domElement );
 
-	setInterval(function () {
+	setInterval( function () {
 
 		stats.update();
 
-	}, 1000/60);
+	}, 1000 / 60 );
+
+## Enable MEM ##
+
+* **Chrome**
+ * *Linux* /opt/google/chrome/google-chrome --enable-memory-info
+ * *Windows* "C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-memory-info
+ * *MacOS* /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --enable-memory-info
+
+* **Safari** 
+ * *MacOS* Open ~/Library/Preferences/com.apple.Safari.plist file for editing, and add & set enabled a boolean preference WebKitMemoryInfoEnabled ([pic](http://mrdoob.github.com/stats.js/assets/safari_enablemem.png))
 
 ### Change Log ###
 
 2010 09 21 - **r5** (3.800 kb)
 
 * Different color per mode.
-* Added MEM mode. (Chrome only)
+* Added MEM mode. (Webkit-based browsers only)
 * Force text left aligned.
 
 
