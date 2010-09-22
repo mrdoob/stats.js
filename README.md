@@ -32,15 +32,15 @@ This class provides a simple info box that will help you monitor your code perfo
 
 	}, 1000 / 60 );
 
-## Enable MEM ##
+### Enable MEM ###
 
 * **Chrome**
- * *Linux* /opt/google/chrome/google-chrome --enable-memory-info
- * *Windows* "C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-memory-info
- * *MacOS* /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --enable-memory-info
+  * Linux: `/opt/google/chrome/google-chrome --enable-memory-info`
+  * Windows: `"C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-memory-info`
+  * MacOS: `/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --enable-memory-info`
 
 * **Safari** 
- * *MacOS* Open ~/Library/Preferences/com.apple.Safari.plist file for editing, and add & set enabled a boolean preference WebKitMemoryInfoEnabled ([pic](http://mrdoob.github.com/stats.js/assets/safari_enablemem.png))
+  * MacOS: Open `~/Library/Preferences/com.apple.Safari.plist` file for editing, and add & set enabled a boolean preference *WebKitMemoryInfoEnabled* ([pic](http://mrdoob.github.com/stats.js/assets/safari_enablemem.png))
 
 ### Change Log ###
 
