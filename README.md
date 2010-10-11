@@ -50,6 +50,8 @@ Drag and drop this link to your bookmarks toolbar: [Stats.js](javascript:(functi
 
 [Hello](javascript:function my_bookmarklet(\){alert('Hello World'\);}my_bookmarklet(\);)
 
+<a href="javascript:(function(){var script=document.createElement('script');script.type='text/javascript';script.src='http://github.com/mrdoob/stats.js/raw/master/build/Stats.js';document.body.appendChild(script);script=document.createElement('script');script.innerHTML='var interval=setInterval(function(){if(typeof Stats==\'function\'){clearInterval(interval);var stats=new Stats();stats.domElement.style.position=\'fixed\';stats.domElement.style.left=\'0px\';stats.domElement.style.top=\'0px\';document.body.appendChild(stats.domElement);setInterval(function(){stats.update();},1000/60);}},100);';document.body.appendChild(script);})();">Stats.js</a>
+
 ### Change Log ###
 
 2010 09 21 - **r5** (3.800 kb)
