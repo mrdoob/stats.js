@@ -41,9 +41,10 @@ var Stats = function () {
 	};
 
 	_container = document.createElement( 'div' );
-	_container.style.opacity = '0.9';
-	_container.style.width = '80px';
 	_container.style.cursor = 'pointer';
+	_container.style.width = '80px';
+	_container.style.opacity = '0.9';
+	_container.style.zIndex = '100';
 	_container.addEventListener( 'click', swapMode, false );
 
 	// fps
