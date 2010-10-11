@@ -44,13 +44,8 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Bookmarklet ###
 
-The widget can also be used as a bookmarklet to monitor any website. Thanks to [@matthewlein](http://twitter.com/matthewlein) for the tip!
-
-Drag and drop this link to your bookmarks toolbar: [Stats.js](javascript:(function(\){var script=document.createElement('script'\);script.type='text/javascript';script.src='http://github.com/mrdoob/stats.js/raw/master/build/Stats.js';document.body.appendChild(script\);script=document.createElement('script'\);script.innerHTML='var interval=setInterval(function(\){if(typeof Stats==\'function\'\){clearInterval(interval\);var stats=new Stats(\);stats.domElement.style.position=\'fixed\';stats.domElement.style.left=\'0px\';stats.domElement.style.top=\'0px\';document.body.appendChild(stats.domElement\);setInterval(function(\){stats.update(\);},1000/60\);}},100\);';document.body.appendChild(script\);}\)(\);)
-
-[Hello](javascript:function my_bookmarklet(\){alert('Hello World'\);}my_bookmarklet(\);)
-
-<a href="javascript:(function(){var script=document.createElement('script');script.type='text/javascript';script.src='http://github.com/mrdoob/stats.js/raw/master/build/Stats.js';document.body.appendChild(script);script=document.createElement('script');script.innerHTML='var interval=setInterval(function(){if(typeof Stats==\'function\'){clearInterval(interval);var stats=new Stats();stats.domElement.style.position=\'fixed\';stats.domElement.style.left=\'0px\';stats.domElement.style.top=\'0px\';document.body.appendChild(stats.domElement);setInterval(function(){stats.update();},1000/60);}},100);';document.body.appendChild(script);})();">Stats.js</a>
+The widget can also be used as a bookmarklet to monitor any website.
+[Follow the instructions](http://mrdoob.com/blog/post/707).
 
 ### Change Log ###
 

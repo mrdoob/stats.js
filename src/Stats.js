@@ -41,9 +41,6 @@ var Stats = function () {
 	};
 
 	_container = document.createElement( 'div' );
-	_container.style.fontFamily = 'Helvetica, Arial, sans-serif';
-	_container.style.textAlign = 'left';
-	_container.style.fontSize = '9px';
 	_container.style.opacity = '0.9';
 	_container.style.width = '80px';
 	_container.style.cursor = 'pointer';
@@ -57,9 +54,12 @@ var Stats = function () {
 	_container.appendChild( _fpsDiv );
 
 	_fpsText = document.createElement( 'div' );
-	_fpsText.innerHTML = '<strong>FPS</strong>';
+	_fpsText.style.fontFamily = 'Helvetica, Arial, sans-serif';
+	_fpsText.style.textAlign = 'left';
+	_fpsText.style.fontSize = '9px';
 	_fpsText.style.color = 'rgb(' + _colors.fps.fg.r + ',' + _colors.fps.fg.g + ',' + _colors.fps.fg.b + ')';
 	_fpsText.style.margin = '0px 0px 1px 3px';
+	_fpsText.innerHTML = '<strong>FPS</strong>';
 	_fpsDiv.appendChild( _fpsText );
 
 	_fpsCanvas = document.createElement( 'canvas' );
@@ -84,9 +84,12 @@ var Stats = function () {
 	_container.appendChild( _msDiv );
 
 	_msText = document.createElement( 'div' );
-	_msText.innerHTML = '<strong>MS</strong>';
+	_msText.style.fontFamily = 'Helvetica, Arial, sans-serif';
+	_msText.style.textAlign = 'left';
+	_msText.style.fontSize = '9px';
 	_msText.style.color = 'rgb(' + _colors.ms.fg.r + ',' + _colors.ms.fg.g + ',' + _colors.ms.fg.b + ')';
 	_msText.style.margin = '0px 0px 1px 3px';
+	_msText.innerHTML = '<strong>MS</strong>';
 	_msDiv.appendChild( _msText );
 
 	_msCanvas = document.createElement( 'canvas' );
@@ -121,9 +124,12 @@ var Stats = function () {
 	_container.appendChild( _memDiv );
 
 	_memText = document.createElement( 'div' );
-	_memText.innerHTML = '<strong>MEM</strong>';
+	_memText.style.fontFamily = 'Helvetica, Arial, sans-serif';
+	_memText.style.textAlign = 'left';
+	_memText.style.fontSize = '9px';
 	_memText.style.color = 'rgb(' + _colors.mem.fg.r + ',' + _colors.mem.fg.g + ',' + _colors.mem.fg.b + ')';
 	_memText.style.margin = '0px 0px 1px 3px';
+	_memText.innerHTML = '<strong>MEM</strong>';
 	_memDiv.appendChild( _memText );
 
 	_memCanvas = document.createElement( 'canvas' );
