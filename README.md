@@ -13,7 +13,9 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Screenshots ###
 
-![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png) ![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)  ![stats_js_mem.png](http://mrdoob.github.com/stats.js/assets/stats_js_mem.png)
+![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png)
+![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)
+![stats_js_mem.png](http://mrdoob.github.com/stats.js/assets/stats_js_mem.png)
 
 ### Usage ###
 
