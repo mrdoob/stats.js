@@ -46,7 +46,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Bookmarklet ###
 
-The widget can also be used as a bookmarklet to monitor any website.
+Albeit theorically not as accurate the widget can also be easily inserted to **any site** using the bookmarklet.
 [Follow the instructions](http://mrdoob.com/blog/post/707).
 
 ### Change Log ###
