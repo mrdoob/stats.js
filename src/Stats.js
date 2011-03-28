@@ -20,7 +20,7 @@
 
 var Stats = function () {
 
-	var _mode = 0, _modesCount = 2, _container,
+	var _mode = 0, _modesCount = 3, _container,
 	_frames = 0, _time = new Date().getTime(), _timeLastFrame = _time, _timeLastSecond = _time,
 	_fps = 0, _fpsMin = 1000, _fpsMax = 0, _fpsDiv, _fpsText, _fpsCanvas, _fpsContext, _fpsImageData,
 	_ms = 0, _msMin = 1000, _msMax = 0, _msDiv, _msText, _msCanvas, _msContext, _msImageData,
@@ -81,7 +81,7 @@ var Stats = function () {
 	_msDiv = document.createElement( 'div' );
 	_msDiv.style.backgroundColor = 'rgb(' + Math.floor( _colors.ms.bg.r / 2 ) + ',' + Math.floor( _colors.ms.bg.g / 2 ) + ',' + Math.floor( _colors.ms.bg.b / 2 ) + ')';
 	_msDiv.style.padding = '2px 0px 3px 0px';
-	_msDiv.style.display = 'none';
+	_msDiv.style.display = 'block';
 	_container.appendChild( _msDiv );
 
 	_msText = document.createElement( 'div' );
@@ -112,7 +112,7 @@ var Stats = function () {
 
 		if ( console && console.memory && console.memory.totalJSHeapSize ) {
 
-			_modesCount = 3;
+			_modesCount = 4;
 
 		}
 
@@ -121,7 +121,7 @@ var Stats = function () {
 	_memDiv = document.createElement( 'div' );
 	_memDiv.style.backgroundColor = 'rgb(' + Math.floor( _colors.mem.bg.r / 2 ) + ',' + Math.floor( _colors.mem.bg.g / 2 ) + ',' + Math.floor( _colors.mem.bg.b / 2 ) + ')';
 	_memDiv.style.padding = '2px 0px 3px 0px';
-	_memDiv.style.display = 'none';
+	_memDiv.style.display = 'block';
 	_container.appendChild( _memDiv );
 
 	_memText = document.createElement( 'div' );
@@ -200,16 +200,25 @@ var Stats = function () {
 			case 0:
 
 				_fpsDiv.style.display = 'block';
+				_msDiv.style.display = 'block';
+				if( _modesCount == 4 )
+					_memDiv.style.display = 'block';
 
 				break;
 
 			case 1:
 
-				_msDiv.style.display = 'block';
+				_fpsDiv.style.display = 'block';
 
 				break;
 
 			case 2:
+
+				_msDiv.style.display = 'block';
+
+				break;
+
+			case 3:
 
 				_memDiv.style.display = 'block';
 
@@ -250,7 +259,7 @@ var Stats = function () {
 				_fpsText.innerHTML = '<span style="font-weight:bold">' + _fps + ' FPS</span> (' + _fpsMin + '-' + _fpsMax + ')';
 				_fpsContext.putImageData( _fpsImageData, 0, 0 );
 
-				if ( _modesCount == 3 ) {
+				if ( _modesCount == 4 ) {
 
 					_mem = console.memory.usedJSHeapSize * 0.000000954;
 					_memMin = Math.min( _memMin, _mem );
