@@ -3,8 +3,6 @@ Stats.js
 
 #### Javascript Performance Monitor ####
 
-[![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png)](http://flattr.com/thing/1993/stats-js)
-
 This class provides a simple info box that will help you monitor your code performance.
 
 * **FPS** Frames rendered in the last second. The higher the number the better.

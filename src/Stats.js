@@ -110,7 +110,7 @@ var Stats = function () {
 
 	try { 
 
-		if ( console && console.memory && console.memory.totalJSHeapSize ) {
+		if ( performance && performance.memory && performance.memory.totalJSHeapSize ) {
 
 			_modesCount = 3;
 
@@ -252,7 +252,7 @@ var Stats = function () {
 
 				if ( _modesCount == 3 ) {
 
-					_mem = console.memory.usedJSHeapSize * 0.000000954;
+					_mem = performance.memory.usedJSHeapSize * 0.000000954;
 					_memMin = Math.min( _memMin, _mem );
 					_memMax = Math.max( _memMax, _mem );
 
