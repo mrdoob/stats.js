@@ -55,7 +55,7 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 ### Change Log ###
 
-2011 05 28 - **r6** (4.102 KB, gzip: 1.387 KB)
+2011 05 28 - **r6** (4.103 KB, gzip: 1.384 KB)
 
 * Updated check for memory accesible browsers.
 * Renamed MEM to MB for consistency reasons.

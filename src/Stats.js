@@ -252,7 +252,7 @@ var Stats = function () {
 
 				if ( _modesCount == 3 ) {
 
-					_mb = performance.mbory.usedJSHeapSize * 0.000000954;
+					_mb = performance.memory.usedJSHeapSize * 0.000000954;
 					_mbMin = Math.min( _mbMin, _mb );
 					_mbMax = Math.max( _mbMax, _mb );
 
