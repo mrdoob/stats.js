@@ -7,7 +7,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 * **FPS** Frames rendered in the last second. The higher the number the better.
 * **MS** Milliseconds needed to render a frame. The lower the number the better.
-* **MEM** Mbytes of memory allocated. Make sure it doesn't keep incrementing. (Webkit-based browsers only)
+* **MB** MBytes of memory allocated. Make sure it doesn't keep incrementing. (Webkit-based browsers only)
 
 ### Screenshots ###
 
@@ -32,7 +32,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 	}, 1000 / 60 );
 
-### Enable MEM ###
+### Enable MB ###
 
 * **Chrome**
   * Linux: `/opt/google/chrome/google-chrome --enable-memory-info`
@@ -49,25 +49,30 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 ### Change Log ###
 
-2010 09 21 - **r5** (3.800 kb)
+2011 05 28 - **r6** (4.102 KB, gzip: 1.387 KB)
+
+* Simply renamed MEM to MB for consistency reasons.
+
+
+2010 09 21 - **r5** (4.126 KB)
 
 * Different color per mode.
 * Added MEM mode. (Webkit-based browsers only)
 * Force text left aligned.
 
 
-2010 06 11 - **r4** (2.235 kb)
+2010 06 11 - **r4** (2.235 KB)
 
 * Added MS mode.
 
 
-2010 05 12 - **r3** (1.241 kb)
+2010 05 12 - **r3** (1.241 KB)
 
 * Switched to module pattern code style.
 * Removed `position = 'absolute'`.
 
 
-2010 03 01 - **r2** (2.177 kb)
+2010 03 01 - **r2** (2.177 KB)
 
 * Simplified.
 

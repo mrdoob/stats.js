@@ -1,5 +1,5 @@
 /*
- * stats.js r5
+ * stats.js r6
  * http://github.com/mrdoob/stats.js
  *
  * Released under MIT license:
@@ -24,7 +24,7 @@ var Stats = function () {
 	_frames = 0, _time = new Date().getTime(), _timeLastFrame = _time, _timeLastSecond = _time,
 	_fps = 0, _fpsMin = 1000, _fpsMax = 0, _fpsDiv, _fpsText, _fpsCanvas, _fpsContext, _fpsImageData,
 	_ms = 0, _msMin = 1000, _msMax = 0, _msDiv, _msText, _msCanvas, _msContext, _msImageData,
-	_mem = 0, _memMin = 1000, _memMax = 0, _memDiv, _memText, _memCanvas, _memContext, _memImageData,
+	_mb = 0, _mbMin = 1000, _mbMax = 0, _mbDiv, _mbText, _mbCanvas, _mbContext, _mbImageData,
 	_colors = {
 		fps: {
 			bg: { r: 16, g: 16, b: 48 },
@@ -34,7 +34,7 @@ var Stats = function () {
 			bg: { r: 16, g: 48, b: 16 },
 			fg: { r: 0, g: 255, b: 0 }
 		},
-		mem: {
+		mb: {
 			bg: { r: 48, g: 16, b: 26 },
 			fg: { r: 255, g: 0, b: 128 }
 		}
@@ -106,7 +106,7 @@ var Stats = function () {
 
 	_msImageData = _msContext.getImageData( 0, 0, _msCanvas.width, _msCanvas.height );
 
-	// mem
+	// mb
 
 	try { 
 
@@ -118,33 +118,33 @@ var Stats = function () {
 
 	} catch ( error ) { };
 
-	_memDiv = document.createElement( 'div' );
-	_memDiv.style.backgroundColor = 'rgb(' + Math.floor( _colors.mem.bg.r / 2 ) + ',' + Math.floor( _colors.mem.bg.g / 2 ) + ',' + Math.floor( _colors.mem.bg.b / 2 ) + ')';
-	_memDiv.style.padding = '2px 0px 3px 0px';
-	_memDiv.style.display = 'none';
-	_container.appendChild( _memDiv );
+	_mbDiv = document.createElement( 'div' );
+	_mbDiv.style.backgroundColor = 'rgb(' + Math.floor( _colors.mb.bg.r / 2 ) + ',' + Math.floor( _colors.mb.bg.g / 2 ) + ',' + Math.floor( _colors.mb.bg.b / 2 ) + ')';
+	_mbDiv.style.padding = '2px 0px 3px 0px';
+	_mbDiv.style.display = 'none';
+	_container.appendChild( _mbDiv );
 
-	_memText = document.createElement( 'div' );
-	_memText.style.fontFamily = 'Helvetica, Arial, sans-serif';
-	_memText.style.textAlign = 'left';
-	_memText.style.fontSize = '9px';
-	_memText.style.color = 'rgb(' + _colors.mem.fg.r + ',' + _colors.mem.fg.g + ',' + _colors.mem.fg.b + ')';
-	_memText.style.margin = '0px 0px 1px 3px';
-	_memText.innerHTML = '<span style="font-weight:bold">MEM</span>';
-	_memDiv.appendChild( _memText );
+	_mbText = document.createElement( 'div' );
+	_mbText.style.fontFamily = 'Helvetica, Arial, sans-serif';
+	_mbText.style.textAlign = 'left';
+	_mbText.style.fontSize = '9px';
+	_mbText.style.color = 'rgb(' + _colors.mb.fg.r + ',' + _colors.mb.fg.g + ',' + _colors.mb.fg.b + ')';
+	_mbText.style.margin = '0px 0px 1px 3px';
+	_mbText.innerHTML = '<span style="font-weight:bold">MB</span>';
+	_mbDiv.appendChild( _mbText );
 
-	_memCanvas = document.createElement( 'canvas' );
-	_memCanvas.width = 74;
-	_memCanvas.height = 30;
-	_memCanvas.style.display = 'block';
-	_memCanvas.style.marginLeft = '3px';
-	_memDiv.appendChild( _memCanvas );
+	_mbCanvas = document.createElement( 'canvas' );
+	_mbCanvas.width = 74;
+	_mbCanvas.height = 30;
+	_mbCanvas.style.display = 'block';
+	_mbCanvas.style.marginLeft = '3px';
+	_mbDiv.appendChild( _mbCanvas );
 
-	_memContext = _memCanvas.getContext( '2d' );
-	_memContext.fillStyle = '#301010';
-	_memContext.fillRect( 0, 0, _memCanvas.width, _memCanvas.height );
+	_mbContext = _mbCanvas.getContext( '2d' );
+	_mbContext.fillStyle = '#301010';
+	_mbContext.fillRect( 0, 0, _mbCanvas.width, _mbCanvas.height );
 
-	_memImageData = _memContext.getImageData( 0, 0, _memCanvas.width, _memCanvas.height );
+	_mbImageData = _mbContext.getImageData( 0, 0, _mbCanvas.width, _mbCanvas.height );
 
 	function updateGraph( data, value, color ) {
 
@@ -193,7 +193,7 @@ var Stats = function () {
 
 		_fpsDiv.style.display = 'none';
 		_msDiv.style.display = 'none';
-		_memDiv.style.display = 'none';
+		_mbDiv.style.display = 'none';
 
 		switch( _mode ) {
 
@@ -211,7 +211,7 @@ var Stats = function () {
 
 			case 2:
 
-				_memDiv.style.display = 'block';
+				_mbDiv.style.display = 'block';
 
 				break;
 		}
@@ -252,14 +252,14 @@ var Stats = function () {
 
 				if ( _modesCount == 3 ) {
 
-					_mem = performance.memory.usedJSHeapSize * 0.000000954;
-					_memMin = Math.min( _memMin, _mem );
-					_memMax = Math.max( _memMax, _mem );
+					_mb = performance.mbory.usedJSHeapSize * 0.000000954;
+					_mbMin = Math.min( _mbMin, _mb );
+					_mbMax = Math.max( _mbMax, _mb );
 
-					updateGraph( _memImageData.data, Math.min( 30, 30 - ( _mem / 2 ) ), 'mem' );
+					updateGraph( _mbImageData.data, Math.min( 30, 30 - ( _mb / 2 ) ), 'mb' );
 
-					_memText.innerHTML = '<span style="font-weight:bold">' + Math.round( _mem ) + ' MEM</span> (' + Math.round( _memMin ) + '-' + Math.round( _memMax ) + ')';
-					_memContext.putImageData( _memImageData, 0, 0 );
+					_mbText.innerHTML = '<span style="font-weight:bold">' + Math.round( _mb ) + ' MB</span> (' + Math.round( _mbMin ) + '-' + Math.round( _mbMax ) + ')';
+					_mbContext.putImageData( _mbImageData, 0, 0 );
 
 				}
 
