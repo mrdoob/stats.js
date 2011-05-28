@@ -3,17 +3,20 @@ Stats.js
 
 #### Javascript Performance Monitor ####
 
+
 This class provides a simple info box that will help you monitor your code performance.
 
 * **FPS** Frames rendered in the last second. The higher the number the better.
 * **MS** Milliseconds needed to render a frame. The lower the number the better.
 * **MB** MBytes of memory allocated. Make sure it doesn't keep incrementing. (Webkit-based browsers only)
 
+
 ### Screenshots ###
 
 ![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png)
 ![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)
 ![stats_js_mem.png](http://mrdoob.github.com/stats.js/assets/stats_js_mem.png)
+
 
 ### Usage ###
 
@@ -32,6 +35,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 	}, 1000 / 60 );
 
+
 ### Enable MB ###
 
 * **Chrome**
@@ -42,19 +46,22 @@ This class provides a simple info box that will help you monitor your code perfo
 * **Safari** 
   * MacOS: Open `~/Library/Preferences/com.apple.Safari.plist` file for editing, and add & set enabled a boolean preference *WebKitMemoryInfoEnabled* ([pic](http://mrdoob.github.com/stats.js/assets/safari_enablemem.png))
 
+
 ### Bookmarklet ###
 
 Albeit theorically not as accurate the widget can also be easily inserted to **any site** using the bookmarklet.
 [Follow the instructions](http://mrdoob.com/blog/post/707).
 
+
 ### Change Log ###
 
 2011 05 28 - **r6** (4.102 KB, gzip: 1.387 KB)
 
-* Simply renamed MEM to MB for consistency reasons.
+* Updated check for memory accesible browsers.
+* Renamed MEM to MB for consistency reasons.
 
 
-2010 09 21 - **r5** (4.126 KB)
+2010 09 21 - **r5** (3.800 KB)
 
 * Different color per mode.
 * Added MEM mode. (Webkit-based browsers only)
