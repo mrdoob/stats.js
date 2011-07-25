@@ -222,8 +222,16 @@ var Stats = function () {
 
 		domElement: _container,
 
-		update: function () {
+    begin: function(time) {
+			_time = time || new Date().getTime();
+			_timeLastFrame = _time;
+			if ( _time > _timeLastSecond + 1000 ) {
+			  _timeLastSecond = _time;
+				_frames = 0;
+      }
+    },
 
+    end: function() {
 			_frames ++;
 
 			_time = new Date().getTime();
@@ -236,8 +244,6 @@ var Stats = function () {
 
 			_msText.innerHTML = '<span style="font-weight:bold">' + _ms + ' MS</span> (' + _msMin + '-' + _msMax + ')';
 			_msContext.putImageData( _msImageData, 0, 0 );
-
-			_timeLastFrame = _time;
 
 			if ( _time > _timeLastSecond + 1000 ) {
 
@@ -262,14 +268,18 @@ var Stats = function () {
 					_mbContext.putImageData( _mbImageData, 0, 0 );
 
 				}
-
-				_timeLastSecond = _time;
-				_frames = 0;
-
 			}
+      return _time;
+    },
 
-		}
+		update: function () {
+      var time = this.end();
+      this.begin(time);
+		},
 
+    swap: function() {
+      swapMode();
+    }
 	};
 
 };
