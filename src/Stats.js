@@ -21,7 +21,7 @@
 var Stats = function () {
 
 	var _mode = 0, _modesCount = 2, _container,
-	_frames = 0, _time = new Date().getTime(), _timeLastFrame = _time, _timeLastSecond = _time,
+	_frames = 0, _time = Date.now(), _timeLastFrame = _time, _timeLastSecond = _time,
 	_fps = 0, _fpsMin = 1000, _fpsMax = 0, _fpsDiv, _fpsText, _fpsCanvas, _fpsContext, _fpsImageData,
 	_ms = 0, _msMin = 1000, _msMax = 0, _msDiv, _msText, _msCanvas, _msContext, _msImageData,
 	_mb = 0, _mbMin = 1000, _mbMax = 0, _mbDiv, _mbText, _mbCanvas, _mbContext, _mbImageData,
@@ -226,7 +226,7 @@ var Stats = function () {
 
 			_frames ++;
 
-			_time = new Date().getTime();
+			_time = Date.now();
 
 			_ms = _time - _timeLastFrame;
 			_msMin = Math.min( _msMin, _ms );

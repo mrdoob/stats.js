@@ -20,21 +20,22 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Usage ###
 
-	var stats = new Stats();
+```javascript
+var stats = new Stats();
 
-	// Align top-left
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.left = '0px';
-	stats.domElement.style.top = '0px';
+// Align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
 
-	parentElement.appendChild( stats.domElement );
+parentElement.appendChild( stats.domElement );
 
-	setInterval( function () {
+setInterval( function () {
 
-		stats.update();
+	stats.update();
 
-	}, 1000 / 60 );
-
+}, 1000 / 60 );
+```
 
 ### Enable MB ###
 
@@ -54,6 +55,11 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 
 ### Change Log ###
+
+2011 10 13 - **r7** (4.083 KB, gzip: 1.377 KB)
+
+* Replaced `new Date().getTime()` with `Date.now()`.
+
 
 2011 05 28 - **r6** (4.103 KB, gzip: 1.384 KB)
 
