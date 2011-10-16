@@ -1,4 +1,4 @@
-Stats.js
+stats.js
 ========
 
 #### Javascript Performance Monitor ####
