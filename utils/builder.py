@@ -1,7 +1,7 @@
 import sys
 import os
 
-rev = 7;
+rev = 8;
 output = '../build/Stats.js';
 string = "// stats.js r" + str(rev) + " - http://github.com/mrdoob/stats.js\n";
 

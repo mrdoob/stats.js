@@ -8,14 +8,12 @@ This class provides a simple info box that will help you monitor your code perfo
 
 * **FPS** Frames rendered in the last second. The higher the number the better.
 * **MS** Milliseconds needed to render a frame. The lower the number the better.
-* **MB** MBytes of memory allocated. Make sure it doesn't keep incrementing. (Webkit-based browsers only)
 
 
 ### Screenshots ###
 
 ![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png)
 ![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)
-![stats_js_mem.png](http://mrdoob.github.com/stats.js/assets/stats_js_mem.png)
 
 
 ### Usage ###
@@ -37,17 +35,6 @@ setInterval( function () {
 }, 1000 / 60 );
 ```
 
-### Enable MB ###
-
-* **Chrome**
-  * Linux: `/opt/google/chrome/google-chrome --enable-memory-info`
-  * Windows: `"C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-memory-info`
-  * MacOS: `/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --enable-memory-info`
-
-* **Safari** 
-  * MacOS: Open `~/Library/Preferences/com.apple.Safari.plist` file for editing, and add & set enabled a boolean preference *WebKitMemoryInfoEnabled* ([pic](http://mrdoob.github.com/stats.js/assets/safari_enablemem.png))
-
-
 ### Bookmarklet ###
 
 Albeit theorically not as accurate the widget can also be easily inserted to **any site** using the bookmarklet.
@@ -55,6 +42,12 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 
 ### Change Log ###
+
+2011 10 16 - **r8** (2.670 KB, gzip: 987 B)
+
+* Performance and size optimizations.
+* Removed memory mode.
+
 
 2011 10 13 - **r7** (4.083 KB, gzip: 1.377 KB)
 
