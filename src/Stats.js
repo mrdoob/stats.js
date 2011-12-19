@@ -146,7 +146,7 @@ var Stats = function () {
 				_frames = 0;
 
 			}
-
+			return { fps: _fps, fpsMax: _fpsMax, fpsMin: _fpsMin };
 		}
 
 	};
