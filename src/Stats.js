@@ -117,7 +117,7 @@ var Stats = function () {
 	return {
 
 		domElement: _container,
-
+		
 		update: function () {
 
 			_time = Date.now();
@@ -135,9 +135,9 @@ var Stats = function () {
 
 			if ( _time > _timeLastSecond + 1000 ) {
 
-				_fps = Math.round( ( _frames * 1000 ) / ( _time - _timeLastSecond ) );
-				_fpsMin = Math.min( _fpsMin, _fps );
-				_fpsMax = Math.max( _fpsMax, _fps );
+				_fps = this.fps = Math.round( ( _frames * 1000 ) / ( _time - _timeLastSecond ) );
+				_fpsMin = this.fpsMin = Math.min( _fpsMin, _fps );
+				_fpsMax = this.fpsMax = Math.max( _fpsMax, _fps );
 
 				_fpsText.textContent = _fps + ' FPS (' + _fpsMin + '-' + _fpsMax + ')';
 				_updateGraph( _fpsGraph, Math.min( 30, 30 - ( _fps / 100 ) * 30 ) );
@@ -146,7 +146,6 @@ var Stats = function () {
 				_frames = 0;
 
 			}
-
 		}
 
 	};
