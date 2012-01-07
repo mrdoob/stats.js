@@ -114,17 +114,34 @@ var Stats = function () {
 
 	}
 
+	var _raw = {
+
+		time: {
+			 min: 0
+			,max: 0
+			,now: 0	
+		}
+		
+		,fps: {
+			 min: 0
+			,max: 0
+			,now: 0	
+		}
+	}
+
 	return {
 
 		domElement: _container,
+		
+		raw: _raw,
 
 		update: function () {
 
 			_time = Date.now();
 
-			_ms = _time - _timeLastFrame;
-			_msMin = Math.min( _msMin, _ms );
-			_msMax = Math.max( _msMax, _ms );
+			_raw.time.now = _ms = _time - _timeLastFrame;
+			_raw.time.min = _msMin = Math.min( _msMin, _ms );
+			_raw.time.max = _msMax = Math.max( _msMax, _ms );
 
 			_msText.textContent = _ms + ' MS (' + _msMin + '-' + _msMax + ')';
 			_updateGraph( _msGraph, Math.min( 30, 30 - ( _ms / 200 ) * 30 ) );
@@ -135,9 +152,9 @@ var Stats = function () {
 
 			if ( _time > _timeLastSecond + 1000 ) {
 
-				_fps = Math.round( ( _frames * 1000 ) / ( _time - _timeLastSecond ) );
-				_fpsMin = Math.min( _fpsMin, _fps );
-				_fpsMax = Math.max( _fpsMax, _fps );
+				_raw.fps.now = _fps = Math.round( ( _frames * 1000 ) / ( _time - _timeLastSecond ) );
+				_raw.fps.min = _fpsMin = Math.min( _fpsMin, _fps );
+				_raw.fps.max = _fpsMax = Math.max( _fpsMax, _fps );
 
 				_fpsText.textContent = _fps + ' FPS (' + _fpsMin + '-' + _fpsMax + ')';
 				_updateGraph( _fpsGraph, Math.min( 30, 30 - ( _fps / 100 ) * 30 ) );
