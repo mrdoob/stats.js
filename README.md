@@ -1,8 +1,7 @@
 stats.js
 ========
 
-#### Javascript Performance Monitor ####
-
+#### JavaScript Performance Monitor ####
 
 This class provides a simple info box that will help you monitor your code performance.
 
@@ -22,11 +21,11 @@ This class provides a simple info box that will help you monitor your code perfo
 var stats = new Stats();
 
 // Align top-left
-stats.domElement.style.position = 'absolute';
-stats.domElement.style.left = '0px';
-stats.domElement.style.top = '0px';
+stats.getDomElement().style.position = 'absolute';
+stats.getDomElement().style.left = '0px';
+stats.getDomElement().style.top = '0px';
 
-parentElement.appendChild( stats.domElement );
+document.body.appendChild( stats.getDomElement() );
 
 setInterval( function () {
 
@@ -35,13 +34,20 @@ setInterval( function () {
 }, 1000 / 60 );
 ```
 
+
 ### Bookmarklet ###
 
-Albeit theorically not as accurate the widget can also be easily inserted to **any site** using the bookmarklet.
+Albeit theorically not as accurate the widget can also be easily inserted to **any site** using a bookmarklet.
 [Follow the instructions](http://mrdoob.com/blog/post/707).
 
 
 ### Change Log ###
+
+2012 01 18 - **r9** (2,872 KB, gzip: 1,038 B)
+
+* Changed `.domElement` to `.getDomElement()`
+* Added `.getFps()`, `.getFpsMin()`, `.getFpsMax()`, `.getMs()`, `.getMsMin()`, `.getMsMax()`.
+
 
 2011 10 16 - **r8** (2.670 KB, gzip: 987 B)
 

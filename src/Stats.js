@@ -116,7 +116,47 @@ var Stats = function () {
 
 	return {
 
-		domElement: _container,
+		getDomElement: function () {
+
+			return _container;
+
+		},
+
+		getFps: function () {
+
+			return _fps;
+
+		},
+
+		getFpsMin: function () {
+
+			return _fpsMin;
+
+		},
+
+		getFpsMax: function () {
+
+			return _fpsMax;
+
+		},
+
+		getMs: function () {
+
+			return _ms;
+
+		},
+
+		getMsMin: function () {
+
+			return _msMin;
+
+		},
+
+		getMsMax: function () {
+
+			return _msMax;
+
+		},
 
 		update: function () {
 
