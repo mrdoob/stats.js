@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+	<script src="../src/Stats.js" ></script>
+	<style>body{background-color:#444;}</style>
+</head>
+
+<body>
+	<button onClick="i=0; t=this; clearInterval(interval); doIt();">Do something!</button>
+
+	<script>
+		var i = 0, t, interval;
+
+		function doIt(){
+			clearInterval(interval);
+
+			i++;
+			t.innerHTML = "looping stupidly... "+parseInt(i/10)+"% complete";	
+
+			if(i>1000)
+			{
+				t.innerHTML = "Do it again ?";
+			} else 
+			{
+				lim = Math.random()*10000000+1;
+				for(ii=0; ii<lim; ii++){
+					p=ii/10000*100;
+				}
+
+				interval = setInterval("doIt()", 10);
+			}
+		}
+
+		var stats = new Stats();
+
+		// Align top-left
+		stats.getDomElement().style.position = 'absolute';
+		stats.getDomElement().style.left = '50%';
+		stats.getDomElement().style.marginLeft = '-40px';
+		stats.getDomElement().style.top = '1px';
+
+		document.body.appendChild( stats.getDomElement() );
+
+		setInterval( function () {
+
+		    stats.update();
+
+		}, 1000 / 60 );
+	</script>
+
+</body>
+</html>
