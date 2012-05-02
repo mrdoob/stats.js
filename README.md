@@ -15,7 +15,9 @@ Original version by Mr. doob :
 ![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png)
 ![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)
 
-Tweaked version by daformat... screenshots coming soon...
+Tweaked version by daformat :
+![stats_js_fps.png](http://mathieujouhet.com/_external/stats_js_fps.png)
+![stats_js_ms.png](http://mathieujouhet.com/_external/stats_js_ms.png)
 
 
 ### Usage ###
