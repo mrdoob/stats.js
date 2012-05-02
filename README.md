@@ -20,6 +20,10 @@ Tweaked version by daformat :
 ![stats_js_ms.png](http://mathieujouhet.com/_external/stats_js_ms.png)
 
 
+### Live example ###
+You can watch the tweaked widget live on [http://mathieujouhet.com/demos/flipping-clock/](http://mathieujouhet.com/demos/flipping-clock/)
+
+
 ### Usage ###
 
 ```javascript
