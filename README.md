@@ -22,7 +22,7 @@ Tweaked version by daformat :
 
 ### Live example ###
 You can watch the tweaked widget live on [http://mathieujouhet.com/demos/flipping-clock/](http://mathieujouhet.com/demos/flipping-clock/)
-
+And if you really want to challenge your processor, goto this [css 3d particles demo](http://mathieujouhet.com/demos/MnMs-Css-3d-particles/) and start adding particles (safari recommended)
 
 ### Usage ###
 
