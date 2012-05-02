@@ -11,9 +11,18 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Screenshots ###
 
+Original version by Mr. doob :
 ![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png)
 ![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)
 
+Tweaked version by daformat :
+![stats_js_fps.png](http://mathieujouhet.com/_external/stats_js_fps.png)
+![stats_js_ms.png](http://mathieujouhet.com/_external/stats_js_ms.png)
+
+
+### Live example ###
+You can watch the tweaked widget live on [http://mathieujouhet.com/demos/flipping-clock/](http://mathieujouhet.com/demos/flipping-clock/)
+And if you really want to challenge your processor, goto this [css 3d particles demo](http://mathieujouhet.com/demos/MnMs-Css-3d-particles/) and start adding particles (safari recommended)
 
 ### Usage ###
 
