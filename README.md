@@ -19,11 +19,12 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ```javascript
 var stats = new Stats();
+stats.setMode(1); // 0: fps, 1: ms
 
 // Align top-left
-stats.getDomElement().style.position = 'absolute';
-stats.getDomElement().style.left = '0px';
-stats.getDomElement().style.top = '0px';
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
 
 document.body.appendChild( stats.getDomElement() );
 
@@ -43,7 +44,16 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 ### Change Log ###
 
-2012 01 18 - **r9** (2,872 KB, gzip: 1,038 B)
+2012 05 10 - **r10** (2,243 KB, gzip: 903 B)
+
+* Changed `.getDomElement()` to `.domElement` back.
+* Removed `.getFps()`, `.getFpsMin()`, `.getFpsMax()`, `.getMs()`, `.getMsMin()`, `.getMsMax()`.
+* Added `.begin()` and `.end()`.
+* Added `.setMode()`.
+* Themeable with CSS.
+
+
+2012 01 18 - **r9** (2,872 KB, gzip: 1,038 KB)
 
 * Changed `.domElement` to `.getDomElement()`
 * Added `.getFps()`, `.getFpsMin()`, `.getFpsMax()`, `.getMs()`, `.getMsMin()`, `.getMsMax()`.
@@ -91,9 +101,9 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 2010 02 21 - **r1**
 
-* Accurate FPS calculation. (thx Spite!)
+* Accurate FPS calculation. (thx @spite!)
 
- 
+
 2009 08 09 - **r0**
 
 * Base code.

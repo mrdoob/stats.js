@@ -1,6 +1,6 @@
 import os
 
-rev = 9
+rev = 10
 source = '../src/Stats.js'
 build = '../build/Stats.js'
 header = '// stats.js r' + str( rev ) + ' - http://github.com/mrdoob/stats.js\n'
