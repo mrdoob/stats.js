@@ -30,7 +30,11 @@ document.body.appendChild( stats.getDomElement() );
 
 setInterval( function () {
 
-	stats.update();
+	stats.begin();
+
+	// your code goes here
+
+	stats.end();
 
 }, 1000 / 60 );
 ```
