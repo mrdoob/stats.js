@@ -1,113 +1,86 @@
 /**
- * @author mr.doob / http://mrdoob.com/
+ * @author mrdoob / http://mrdoob.com/
  */
 
 var Stats = function () {
 
-	var _container, _bar, _mode = 0, _modes = 2,
-	_frames = 0, _time = Date.now(), _timeLastFrame = _time, _timeLastSecond = _time,
-	_fps = 0, _fpsMin = 1000, _fpsMax = 0, _fpsDiv, _fpsText, _fpsGraph,
-	_fpsColors = [ [ 16, 16, 48 ], [ 0, 255, 255 ] ],
-	_ms = 0, _msMin = 1000, _msMax = 0, _msDiv, _msText, _msGraph,
-	_msColors = [ [ 16, 48, 16 ], [ 0, 255, 0 ] ];
+	var startTime = Date.now(), prevTime = startTime;
+	var ms = 0, msMin = 1000, msMax = 0;
+	var fps = 0, fpsMin = 1000, fpsMax = 0;
+	var frames = 0, mode = 0;	
 
-	_container = document.createElement( 'div' );
-	_container.style.cursor = 'pointer';
-	_container.style.width = '80px';
-	_container.style.opacity = '0.9';
-	_container.style.zIndex = '10001';
-	_container.addEventListener( 'mousedown', function ( event ) {
+	var container = document.createElement( 'div' );
+	container.id = 'stats';
+	container.addEventListener( 'mousedown', function ( event ) { event.preventDefault(); setMode( ++ mode % 2 ) }, false );
+	container.style.cssText = 'width:80px;opacity:0.9;cursor:pointer';
 
-		event.preventDefault();
+	var fpsDiv = document.createElement( 'div' );
+	fpsDiv.id = 'fps';
+	fpsDiv.style.cssText = 'padding:0 0 3px 3px;text-align:left;background-color:#002';
+	container.appendChild( fpsDiv );
 
-		_mode = ( _mode + 1 ) % _modes;
+	var fpsText = document.createElement( 'div' );
+	fpsText.id = 'fpsText';
+	fpsText.style.cssText = 'color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px'
+	fpsText.innerHTML = 'FPS';
+	fpsDiv.appendChild( fpsText );
 
-		if ( _mode == 0 ) {
+	var fpsGraph = document.createElement( 'div' );
+	fpsGraph.id = 'fpsGraph';
+	fpsGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0ff';
+	fpsDiv.appendChild( fpsGraph );
 
-			_fpsDiv.style.display = 'block';
-			_msDiv.style.display = 'none';
+	while ( fpsGraph.children.length < 74 ) {
 
-		} else {
+		var bar = document.createElement( 'span' );
+		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#113'
+		fpsGraph.appendChild( bar );
 
-			_fpsDiv.style.display = 'none';
-			_msDiv.style.display = 'block';
+	}
 
+	var msDiv = document.createElement( 'div' );
+	msDiv.id = 'ms';
+	msDiv.style.cssText = 'padding:0 0 3px 3px;text-align:left;background-color:#020;display:none';
+	container.appendChild( msDiv );
+
+	var msText = document.createElement( 'div' );
+	msText.id = 'msText';
+	msText.style.cssText = 'color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px'
+	msText.innerHTML = 'MS';
+	msDiv.appendChild( msText );
+
+	var msGraph = document.createElement( 'div' );
+	msGraph.id = 'msGraph';
+	msGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0f0';
+	msDiv.appendChild( msGraph );
+
+	while ( msGraph.children.length < 74 ) {
+
+		var bar = document.createElement( 'span' );
+		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#131'
+		msGraph.appendChild( bar );
+
+	}
+
+	var setMode = function ( value ) {
+
+		mode = value;
+
+		switch ( mode ) {
+
+			case 0:
+				fpsDiv.style.display = 'block';
+				msDiv.style.display = 'none';
+				break;
+			case 1:
+				fpsDiv.style.display = 'none';
+				msDiv.style.display = 'block';
+				break;
 		}
 
-	}, false );
-
-	// fps
-
-	_fpsDiv = document.createElement( 'div' );
-	_fpsDiv.style.textAlign = 'left';
-	_fpsDiv.style.lineHeight = '1.2em';
-	_fpsDiv.style.backgroundColor = 'rgb(' + Math.floor( _fpsColors[ 0 ][ 0 ] / 2 ) + ',' + Math.floor( _fpsColors[ 0 ][ 1 ] / 2 ) + ',' + Math.floor( _fpsColors[ 0 ][ 2 ] / 2 ) + ')';
-	_fpsDiv.style.padding = '0 0 3px 3px';
-	_container.appendChild( _fpsDiv );
-
-	_fpsText = document.createElement( 'div' );
-	_fpsText.style.fontFamily = 'Helvetica, Arial, sans-serif';
-	_fpsText.style.fontSize = '9px';
-	_fpsText.style.color = 'rgb(' + _fpsColors[ 1 ][ 0 ] + ',' + _fpsColors[ 1 ][ 1 ] + ',' + _fpsColors[ 1 ][ 2 ] + ')';
-	_fpsText.style.fontWeight = 'bold';
-	_fpsText.innerHTML = 'FPS';
-	_fpsDiv.appendChild( _fpsText );
-
-	_fpsGraph = document.createElement( 'div' );
-	_fpsGraph.style.position = 'relative';
-	_fpsGraph.style.width = '74px';
-	_fpsGraph.style.height = '30px';
-	_fpsGraph.style.backgroundColor = 'rgb(' + _fpsColors[ 1 ][ 0 ] + ',' + _fpsColors[ 1 ][ 1 ] + ',' + _fpsColors[ 1 ][ 2 ] + ')';
-	_fpsDiv.appendChild( _fpsGraph );
-
-	while ( _fpsGraph.children.length < 74 ) {
-
-		_bar = document.createElement( 'span' );
-		_bar.style.width = '1px';
-		_bar.style.height = '30px';
-		_bar.style.cssFloat = 'left';
-		_bar.style.backgroundColor = 'rgb(' + _fpsColors[ 0 ][ 0 ] + ',' + _fpsColors[ 0 ][ 1 ] + ',' + _fpsColors[ 0 ][ 2 ] + ')';
-		_fpsGraph.appendChild( _bar );
-
 	}
 
-	// ms
-
-	_msDiv = document.createElement( 'div' );
-	_msDiv.style.textAlign = 'left';
-	_msDiv.style.lineHeight = '1.2em';
-	_msDiv.style.backgroundColor = 'rgb(' + Math.floor( _msColors[ 0 ][ 0 ] / 2 ) + ',' + Math.floor( _msColors[ 0 ][ 1 ] / 2 ) + ',' + Math.floor( _msColors[ 0 ][ 2 ] / 2 ) + ')';
-	_msDiv.style.padding = '0 0 3px 3px';
-	_msDiv.style.display = 'none';
-	_container.appendChild( _msDiv );
-
-	_msText = document.createElement( 'div' );
-	_msText.style.fontFamily = 'Helvetica, Arial, sans-serif';
-	_msText.style.fontSize = '9px';
-	_msText.style.color = 'rgb(' + _msColors[ 1 ][ 0 ] + ',' + _msColors[ 1 ][ 1 ] + ',' + _msColors[ 1 ][ 2 ] + ')';
-	_msText.style.fontWeight = 'bold';
-	_msText.innerHTML = 'MS';
-	_msDiv.appendChild( _msText );
-
-	_msGraph = document.createElement( 'div' );
-	_msGraph.style.position = 'relative';
-	_msGraph.style.width = '74px';
-	_msGraph.style.height = '30px';
-	_msGraph.style.backgroundColor = 'rgb(' + _msColors[ 1 ][ 0 ] + ',' + _msColors[ 1 ][ 1 ] + ',' + _msColors[ 1 ][ 2 ] + ')';
-	_msDiv.appendChild( _msGraph );
-
-	while ( _msGraph.children.length < 74 ) {
-
-		_bar = document.createElement( 'span' );
-		_bar.style.width = '1px';
-		_bar.style.height = Math.random() * 30 + 'px';
-		_bar.style.cssFloat = 'left';
-		_bar.style.backgroundColor = 'rgb(' + _msColors[ 0 ][ 0 ] + ',' + _msColors[ 0 ][ 1 ] + ',' + _msColors[ 0 ][ 2 ] + ')';
-		_msGraph.appendChild( _bar );
-
-	}
-
-	var _updateGraph = function ( dom, value ) {
+	var updateGraph = function ( dom, value ) {
 
 		var child = dom.appendChild( dom.firstChild );
 		child.style.height = value + 'px';
@@ -116,79 +89,53 @@ var Stats = function () {
 
 	return {
 
-		getDomElement: function () {
+		domElement: container,
 
-			return _container;
+		setMode: setMode,
 
-		},
+		begin: function () {
 
-		getFps: function () {
-
-			return _fps;
+			startTime = Date.now();
 
 		},
 
-		getFpsMin: function () {
+		end: function () {
 
-			return _fpsMin;
+			var time = Date.now();
 
-		},
+			ms = time - startTime;
+			msMin = Math.min( msMin, ms );
+			msMax = Math.max( msMax, ms );
 
-		getFpsMax: function () {
+			msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
+			updateGraph( msGraph, Math.min( 30, 30 - ( ms / 200 ) * 30 ) );
 
-			return _fpsMax;
+			frames ++;
 
-		},
+			if ( time > prevTime + 1000 ) {
 
-		getMs: function () {
+				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
+				fpsMin = Math.min( fpsMin, fps );
+				fpsMax = Math.max( fpsMax, fps );
 
-			return _ms;
+				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
+				updateGraph( fpsGraph, Math.min( 30, 30 - ( fps / 100 ) * 30 ) );
 
-		},
+				prevTime = time;
+				frames = 0;
 
-		getMsMin: function () {
+			}
 
-			return _msMin;
-
-		},
-
-		getMsMax: function () {
-
-			return _msMax;
+			return time;
 
 		},
 
 		update: function () {
 
-			_time = Date.now();
-
-			_ms = _time - _timeLastFrame;
-			_msMin = Math.min( _msMin, _ms );
-			_msMax = Math.max( _msMax, _ms );
-
-			_msText.textContent = _ms + ' MS (' + _msMin + '-' + _msMax + ')';
-			_updateGraph( _msGraph, Math.min( 30, 30 - ( _ms / 200 ) * 30 ) );
-
-			_timeLastFrame = _time;
-
-			_frames ++;
-
-			if ( _time > _timeLastSecond + 1000 ) {
-
-				_fps = Math.round( ( _frames * 1000 ) / ( _time - _timeLastSecond ) );
-				_fpsMin = Math.min( _fpsMin, _fps );
-				_fpsMax = Math.max( _fpsMax, _fps );
-
-				_fpsText.textContent = _fps + ' FPS (' + _fpsMin + '-' + _fpsMax + ')';
-				_updateGraph( _fpsGraph, Math.min( 30, 30 - ( _fps / 100 ) * 30 ) );
-
-				_timeLastSecond = _time;
-				_frames = 0;
-
-			}
-
+			startTime = this.end();
+			
 		}
 
-	};
-
+	}
+	
 };
