@@ -21,7 +21,7 @@ var Stats = function () {
 
 	var fpsText = document.createElement( 'div' );
 	fpsText.id = 'fpsText';
-	fpsText.style.cssText = 'color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px'
+	fpsText.style.cssText = 'color:#0ff;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px';
 	fpsText.innerHTML = 'FPS';
 	fpsDiv.appendChild( fpsText );
 
@@ -33,7 +33,7 @@ var Stats = function () {
 	while ( fpsGraph.children.length < 74 ) {
 
 		var bar = document.createElement( 'span' );
-		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#113'
+		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#113';
 		fpsGraph.appendChild( bar );
 
 	}
@@ -45,7 +45,7 @@ var Stats = function () {
 
 	var msText = document.createElement( 'div' );
 	msText.id = 'msText';
-	msText.style.cssText = 'color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px'
+	msText.style.cssText = 'color:#0f0;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px';
 	msText.innerHTML = 'MS';
 	msDiv.appendChild( msText );
 
@@ -57,7 +57,7 @@ var Stats = function () {
 	while ( msGraph.children.length < 74 ) {
 
 		var bar = document.createElement( 'span' );
-		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#131'
+		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#131';
 		msGraph.appendChild( bar );
 
 	}
