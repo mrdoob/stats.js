@@ -1,16 +1,9 @@
 import os
 
-rev = 10
 source = '../src/Stats.js'
-build = '../build/Stats.js'
-header = '// stats.js r' + str( rev ) + ' - http://github.com/mrdoob/stats.js\n'
+output = '../build/stats.min.js'
 
-os.system( 'java -jar compiler/compiler.jar --language_in=ECMASCRIPT5 --js ' + source + ' --js_output_file ' + build )
+os.system('java -jar compiler/compiler.jar --language_in=ECMASCRIPT5 --js ' + source + ' --js_output_file ' + output)
 
-file = open( build, 'r' )
-contents = file.read();
-file.close()
-
-file = open( build, 'w' )
-file.write( header + contents )
-file.close()
+with open(output,'r') as f: text = f.read()
+with open(output,'w') as f: f.write("// stats.js - http://github.com/mrdoob/stats.js\n" + text)
