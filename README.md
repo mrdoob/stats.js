@@ -48,6 +48,11 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 ### Change Log ###
 
+2012 09 01 - **r11** (2,243 KB, gzip: 903 B)
+
+* Renamed `build/Stats.js` to `build/stats.min.js`.
+
+
 2012 05 10 - **r10** (2,243 KB, gzip: 903 B)
 
 * Changed `.getDomElement()` to `.domElement` back.
