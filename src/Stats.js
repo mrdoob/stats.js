@@ -4,9 +4,12 @@
 
 var Stats = function () {
 
+	var size = 74;
+	var ArrayType = Int16Array || Array;
+
 	var startTime = Date.now(), prevTime = startTime;
-	var ms = 0, msMin = Infinity, msMax = 0;
-	var fps = 0, fpsMin = Infinity, fpsMax = 0;
+	var ms = 0, msIndex = 0, msMin = 0, msMax = 0, msHistory = new ArrayType( size ), msFull = false;
+	var fps = 0, fpsIndex = 0, fpsMin = 0, fpsMax = 0, fpsHistory = new ArrayType( size ), fpsFull = false;
 	var frames = 0, mode = 0;
 
 	var container = document.createElement( 'div' );
@@ -27,10 +30,10 @@ var Stats = function () {
 
 	var fpsGraph = document.createElement( 'div' );
 	fpsGraph.id = 'fpsGraph';
-	fpsGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0ff';
+	fpsGraph.style.cssText = 'position:relative;width:' + size + 'px;height:30px;background-color:#0ff';
 	fpsDiv.appendChild( fpsGraph );
 
-	while ( fpsGraph.children.length < 74 ) {
+	while ( fpsGraph.children.length < size ) {
 
 		var bar = document.createElement( 'span' );
 		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#113';
@@ -51,10 +54,10 @@ var Stats = function () {
 
 	var msGraph = document.createElement( 'div' );
 	msGraph.id = 'msGraph';
-	msGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0f0';
+	msGraph.style.cssText = 'position:relative;width:' + size + 'px;height:30px;background-color:#0f0';
 	msDiv.appendChild( msGraph );
 
-	while ( msGraph.children.length < 74 ) {
+	while ( msGraph.children.length < size ) {
 
 		var bar = document.createElement( 'span' );
 		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#131';
@@ -87,6 +90,24 @@ var Stats = function () {
 
 	}
 
+	var findIndex = function ( array, length, compareFunc, currentIndex ) {
+
+		var index = ( currentIndex + 1 ) % length;
+
+		for ( var i = index; i !== currentIndex; i = ( i + 1 ) % length ) {
+
+			if ( compareFunc( array[index], array[i] ) === array[i] ) {
+
+				index = i;
+
+			}
+
+		}
+
+		return index;
+
+	}
+
 	return {
 
 		REVISION: 11,
@@ -106,10 +127,37 @@ var Stats = function () {
 			var time = Date.now();
 
 			ms = time - startTime;
-			msMin = Math.min( msMin, ms );
-			msMax = Math.max( msMax, ms );
 
-			msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
+			if ( ms <= msHistory[ msMin ] ) {
+
+				msMin = msIndex;
+
+			} else if ( msMin === msIndex ) {
+
+				msMin = findIndex( msHistory, msFull ? size : msIndex + 1, Math.min, msIndex );
+
+			}
+
+			if ( ms >= msHistory[ msMax ] ) {
+
+				msMax = msIndex;
+
+			} else if ( msMax === msIndex ) {
+
+				msMax = findIndex( msHistory, msFull ? size : msIndex + 1, Math.max, msIndex );
+
+			}
+
+			msHistory[ msIndex ] = ms;
+			msIndex = ( msIndex + 1 ) % size;
+
+			if ( msIndex === 0 ) {
+
+				msFull = true;
+
+			}
+
+			msText.textContent = ms + ' MS (' + msHistory[ msMin ] + '-' + msHistory[ msMax ] + ')';
 			updateGraph( msGraph, Math.min( 30, 30 - ( ms / 200 ) * 30 ) );
 
 			frames ++;
@@ -117,10 +165,37 @@ var Stats = function () {
 			if ( time > prevTime + 1000 ) {
 
 				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
-				fpsMin = Math.min( fpsMin, fps );
-				fpsMax = Math.max( fpsMax, fps );
 
-				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
+				if ( fps <= fpsHistory[ fpsMin ] ) {
+
+					fpsMin = fpsIndex;
+
+				} else if ( fpsMin === fpsIndex ) {
+
+					fpsMin = findIndex( fpsHistory, fpsFull ? size : fpsIndex + 1, Math.min, fpsIndex );
+
+				}
+
+				if ( fps >= fpsHistory[ fpsMax ] ) {
+
+					fpsMax = fpsIndex;
+
+				} else if ( fpsMax === fpsIndex ) {
+
+					fpsMax = findIndex( fpsHistory, fpsFull ? size : fpsIndex + 1, Math.max, fpsIndex );
+
+				}
+
+				fpsHistory[ fpsIndex ] = fps;
+				fpsIndex = ( fpsIndex + 1 ) % size;
+
+				if ( fpsIndex === 0 ) {
+
+					fpsFull = true;
+
+				}
+
+				fpsText.textContent = fps + ' FPS (' + fpsHistory[ fpsMin ] + '-' + fpsHistory[ fpsMax ] + ')';
 				updateGraph( fpsGraph, Math.min( 30, 30 - ( fps / 100 ) * 30 ) );
 
 				prevTime = time;
