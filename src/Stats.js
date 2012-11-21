@@ -13,27 +13,9 @@ var Stats = function () {
 	container.addEventListener( 'mousedown', function ( event ) { event.preventDefault(); setMode( ++ mode % 2 ) }, false );
 	container.style.cssText = 'width:' + ( size + 6 ) + 'px;opacity:0.9;cursor:pointer';
 
-	var extremIndex = function ( array, length, compareFunc, currentIndex ) {
+	var createGraph = function( id, color, bgColor, graphBgColor, maxValue ) {
 
-		var index = ( currentIndex + 1 ) % length;
-
-		for ( var i = index; i !== currentIndex; i = ( i + 1 ) % length ) {
-
-			if ( compareFunc( array[index], array[i] ) === array[i] ) {
-
-				index = i;
-
-			}
-
-		}
-
-		return index;
-
-	}
-
-	var createGraph = function( id, color, bgColor, graphBgColor, scale ) {
-
-		var index = 0, min = 0, max = 0, history = new ArrayType( size ), looped = false;
+		var history = new ArrayType( size ), next = 0, min = 0, max = 0, isFull = false;
 
 		var div = document.createElement( 'div' );
 		div.id = id;
@@ -59,43 +41,63 @@ var Stats = function () {
 
 		}
 
+		var updateExtreme = function ( extreme, compareFunc, value ) {
+
+			// check if value is a new extreme
+			if ( compareFunc( value, history[ extreme ] ) === value ) {
+
+				extreme = next;
+
+			// check if old extreme will be overwritten
+			} else if ( extreme === next ) {
+
+				// only look at the part of the history that was filled so far
+				var length = isFull ? size : next + 1;
+
+				// start at the oldest value
+				extreme = ( next + 1 ) % length;
+
+				// go through the whole history
+				for ( var i = extreme; i !== next; i = ( i + 1 ) % length ) {
+
+					// look for the most recent extreme
+					if ( compareFunc( history[ extreme ], history[ i ] ) === history[ i ] ) {
+
+						extreme = i;
+
+					}
+
+				}
+
+			}
+
+			return extreme;
+
+		}
+
 		return {
 
 			update : function( value ) {
 
-				if ( value <= history[ min ] ) {
+				// update the extremes if necessary
+				min = updateExtreme( min, Math.min, value );
+				max = updateExtreme( max, Math.max, value );
 
-					min = index;
+				// save the new value
+				history[ next ] = value;
+				next = ( next + 1 ) % size;
 
-				} else if ( min === index ) {
+				// check if the history has been filled
+				if ( next === 0 ) {
 
-					min = extremIndex( history, looped ? size : index + 1, Math.min, index );
-
-				}
-
-				if ( value >= history[ max ] ) {
-
-					max = index;
-
-				} else if ( max === index ) {
-
-					max = extremIndex( history, looped ? size : index + 1, Math.max, index );
-
-				}
-
-				history[ index ] = value;
-				index = ( index + 1 ) % size;
-
-				if ( index === 0 ) {
-
-					looped = true;
+					isFull = true;
 
 				}
 
 				text.textContent = value + ' ' + id.toUpperCase() + ' (' + history[ min ] + '-' + history[ max ] + ')';
 
 				var child = graph.appendChild( graph.firstChild );
-				child.style.height = Math.max( ( 1 - value / scale ) * 30, 1 ) + 'px';
+				child.style.height = Math.max( ( 1 - value / maxValue ) * 30, 1 ) + 'px';
 
 			},
 
