@@ -1,8 +1,10 @@
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-
 var Stats = function () {
+
+	var updateFrame = 0;
+	var injections = {};
 
 	var startTime = Date.now(), prevTime = startTime;
 	var ms = 0, msMin = Infinity, msMax = 0;
@@ -87,6 +89,10 @@ var Stats = function () {
 
 	}
 
+	var tick = function() {
+		//Continue
+	}
+
 	return {
 
 		REVISION: 11,
@@ -125,19 +131,41 @@ var Stats = function () {
 
 				prevTime = time;
 				frames = 0;
-
 			}
 
 			return time;
-
 		},
 
-		update: function () {
+		update: function() {
 
 			startTime = this.end();
 
+		},
+
+		set: function(id, callback, params) {
+			
+			var stats = this;
+
+			this.clear();
+
+			injections[id] = function() {
+				stats.begin();
+				for (var key in injections) {
+					callback.apply(stats, [key].concat(params));
+				}
+				stats.end();
+			}
+
+			if (!updateFrame) {
+				updateFrame = window.setInterval(injections[id]);
+			}
+		},
+
+		clear: function(id) {
+			
+			window.clearInterval(updateFrame);
+			updateFrame = null;
+
 		}
-
 	}
-
 };
