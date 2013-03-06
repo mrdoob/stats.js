@@ -54,6 +54,12 @@ var Stats = function () {
 	msGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0f0';
 	msDiv.appendChild( msGraph );
 
+	var enabled = true;
+	
+	window.addEventListener("hashchange", function() {
+		updateEnabled(getEnabled());
+	}, false);
+
 	while ( msGraph.children.length < 74 ) {
 
 		var bar = document.createElement( 'span' );
@@ -62,9 +68,45 @@ var Stats = function () {
 
 	}
 
+	var getEnabled = function () {
+		var hashStr = window.location.hash.replace("#", "");
+		if (hashStr.length > 0) {
+			var hashKeyValues = hashStr.split("&");
+			for (var i = 0; i < hashKeyValues.length; i++) {
+				var keyval = hashKeyValues[i].split("=");
+				if (keyval.length < 2)
+					continue;
+
+				if (keyval[0] == "statsEnabled") {
+					return (keyval[1] != "0");
+				}
+			}
+		}
+
+		return true;
+	}
+
+	var updateEnabled = function(val) {
+		if (val == enabled)
+			return;
+
+		enabled = val;
+		console.log("Stats enabled: " + enabled);
+
+		if (enabled) {
+			setMode(mode);
+		} else {
+			fpsDiv.style.display = 'none';
+			msDiv.style.display = 'none';
+		}
+	}
+
 	var setMode = function ( value ) {
 
 		mode = value;
+
+		if (!enabled)
+			return;
 
 		switch ( mode ) {
 
@@ -86,6 +128,8 @@ var Stats = function () {
 		child.style.height = value + 'px';
 
 	}
+
+	updateEnabled(getEnabled());
 
 	return {
 
