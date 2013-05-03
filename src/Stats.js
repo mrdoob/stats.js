@@ -99,7 +99,7 @@ var Stats = function () {
 	var updateGraph = function ( dom, value ) {
 
 		var child = dom.appendChild( dom.firstChild );
-		child.style.height = value + 'px';
+		child.style.height = (value < 0 ? 0 : value) + 'px';
 
 	}
 
