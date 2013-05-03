@@ -8,10 +8,26 @@ var Stats = function () {
 	var ms = 0, msMin = Infinity, msMax = 0;
 	var fps = 0, fpsMin = Infinity, fpsMax = 0;
 	var frames = 0, mode = 0;
+	var textProperty = document.body.textContent ? 'textContent' : 'innerText';
+
+	function toggleModeEvent( event ) {
+
+		if (event.preventDefault) {
+			event.preventDefault();
+		} else {
+			event.returnValue = false;
+		}
+
+		setMode( ++ mode % 2 )
+	};
 
 	var container = document.createElement( 'div' );
 	container.id = 'stats';
-	container.addEventListener( 'mousedown', function ( event ) { event.preventDefault(); setMode( ++ mode % 2 ) }, false );
+	if (container.addEventListener) {
+		container.addEventListener('mousedown', toggleModeEvent, false);
+	} else {
+		container.attachEvent('onmousedown', toggleModeEvent);
+	}
 	container.style.cssText = 'width:80px;opacity:0.9;cursor:pointer';
 
 	var fpsDiv = document.createElement( 'div' );
@@ -109,7 +125,7 @@ var Stats = function () {
 			msMin = Math.min( msMin, ms );
 			msMax = Math.max( msMax, ms );
 
-			msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
+			msText[textProperty] = ms + ' MS (' + msMin + '-' + msMax + ')';
 			updateGraph( msGraph, Math.min( 30, 30 - ( ms / 200 ) * 30 ) );
 
 			frames ++;
@@ -120,7 +136,7 @@ var Stats = function () {
 				fpsMin = Math.min( fpsMin, fps );
 				fpsMax = Math.max( fpsMax, fps );
 
-				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
+				fpsText[textProperty] = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
 				updateGraph( fpsGraph, Math.min( 30, 30 - ( fps / 100 ) * 30 ) );
 
 				prevTime = time;
