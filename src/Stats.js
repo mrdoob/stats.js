@@ -18,8 +18,8 @@ var Stats = function () {
 			event.returnValue = false;
 		}
 
-		setMode( ++ mode % 2 )
-	};
+		setMode( ++ mode % 2 );
+	}
 
 	var container = document.createElement( 'div' );
 	container.id = 'stats';
