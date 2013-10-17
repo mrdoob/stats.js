@@ -1,0 +1,23 @@
+{
+  "name": "stats.js",
+  "version": "0.0.11",
+  "homepage": "https://github.com/mrdoob/stats.js",
+  "authors": [
+    "mrdoob"
+  ],
+  "description": "JavaScript Performance Monitor",
+  "main": "build/stats.min.js",
+  "ignore": [
+    "examples",
+    "utils"
+  ],
+  "keywords": [
+    "stats",
+	"statistics",
+	"performance",
+	"webgl",
+	"monitor",
+	"fps"	
+  ],
+  "license": "MIT"
+}
