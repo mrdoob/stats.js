@@ -43,7 +43,7 @@ setInterval( function () {
 ### Bookmarklet ###
 
 Albeit theorically not as accurate the widget can also be easily inserted to **any site** using a bookmarklet.
-[Follow the instructions](http://mrdoob.com/blog/post/707).
+[Follow the instructions](http://ricardocabello.com/blog/post/707).
 
 
 ### Change Log ###
