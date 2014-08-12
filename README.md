@@ -48,6 +48,11 @@ Albeit theorically not as accurate the widget can also be easily inserted to **a
 
 ### Change Log ###
 
+2014 08 11 - **r12** (2,310 KB, gzip: 1,087 B)
+
+* Browserify support. (@Miha-ha)
+
+
 2012 09 01 - **r11** (2,243 KB, gzip: 903 B)
 
 * Renamed `build/Stats.js` to `build/stats.min.js`.

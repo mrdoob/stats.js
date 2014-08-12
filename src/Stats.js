@@ -89,7 +89,7 @@ var Stats = function () {
 
 	return {
 
-		REVISION: 11,
+		REVISION: 12,
 
 		domElement: container,
 
@@ -142,6 +142,8 @@ var Stats = function () {
 
 };
 
-if (typeof module === "object") {
-    module.exports = Stats;
+if ( typeof module === 'object' ) {
+
+	module.exports = Stats;
+
 }
