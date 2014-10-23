@@ -28,7 +28,7 @@ stats.domElement.style.top = '0px';
 
 document.body.appendChild( stats.domElement );
 
-setInterval( function () {
+requestAnimationFrame( function () {
 
 	stats.begin();
 
@@ -36,7 +36,7 @@ setInterval( function () {
 
 	stats.end();
 
-}, 1000 / 60 );
+});
 ```
 
 
