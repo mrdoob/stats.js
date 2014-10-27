@@ -28,15 +28,18 @@ stats.domElement.style.top = '0px';
 
 document.body.appendChild( stats.domElement );
 
-setInterval( function () {
+render = function () {
 
 	stats.begin();
 
 	// your code goes here
 
 	stats.end();
+	
+	requestAnimationFrame(render);
+};
 
-}, 1000 / 60 );
+requestAnimationFrame(render);
 ```
 
 
