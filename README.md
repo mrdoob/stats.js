@@ -28,15 +28,18 @@ stats.domElement.style.top = '0px';
 
 document.body.appendChild( stats.domElement );
 
-requestAnimationFrame( function () {
+render = function () {
 
 	stats.begin();
 
 	// your code goes here
 
 	stats.end();
+	
+	requestAnimationFrame(render);
+};
 
-});
+requestAnimationFrame(render);
 ```
 
 
