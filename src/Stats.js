@@ -100,6 +100,12 @@ var Stats = function () {
 			startTime = Date.now();
 
 		},
+		
+		getFPS: function () {
+			
+			return fps;
+			
+    		},
 
 		end: function () {
 
