@@ -2,6 +2,17 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
+// Date.now shim for (ahem) Internet Explo(d|r)er
+	if (Date.now === undefined) {
+
+		Date.now = function () {
+
+			return new Date().valueOf();
+
+		};
+
+	}
+
 var Stats = function () {
 
 	var startTime = Date.now(), prevTime = startTime;
@@ -11,7 +22,7 @@ var Stats = function () {
 
 	var container = document.createElement( 'div' );
 	container.id = 'stats';
-	container.addEventListener( 'mousedown', function ( event ) { event.preventDefault(); setMode( ++ mode % 2 ) }, false );
+	container.onmousedown = function () { setMode( ++ mode % 2 ); return false; }
 	container.style.cssText = 'width:80px;opacity:0.9;cursor:pointer';
 
 	var fpsDiv = document.createElement( 'div' );
@@ -83,7 +94,7 @@ var Stats = function () {
 	var updateGraph = function ( dom, value ) {
 
 		var child = dom.appendChild( dom.firstChild );
-		child.style.height = value + 'px';
+		child.style.height = value;
 
 	};
 
@@ -109,7 +120,7 @@ var Stats = function () {
 			msMin = Math.min( msMin, ms );
 			msMax = Math.max( msMax, ms );
 
-			msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
+			msText.innerHTML = ms + ' MS (' + msMin + '-' + msMax + ')';
 			updateGraph( msGraph, Math.min( 30, 30 - ( ms / 200 ) * 30 ) );
 
 			frames ++;
@@ -120,7 +131,7 @@ var Stats = function () {
 				fpsMin = Math.min( fpsMin, fps );
 				fpsMax = Math.max( fpsMax, fps );
 
-				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
+				fpsText.innerHTML = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
 				updateGraph( fpsGraph, Math.min( 30, 30 - ( fps / 100 ) * 30 ) );
 
 				prevTime = time;
