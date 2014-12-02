@@ -4,7 +4,11 @@
 
 var Stats = function () {
 
-	var startTime = Date.now(), prevTime = startTime;
+	function getTime ( ) {
+		return performance ? (performance.now()) : (Date.now());
+	}
+
+	var startTime = getTime(), prevTime = startTime;
 	var ms = 0, msMin = Infinity, msMax = 0;
 	var fps = 0, fpsMin = Infinity, fpsMax = 0;
 	var frames = 0, mode = 0;
@@ -12,7 +16,7 @@ var Stats = function () {
 	var container = document.createElement( 'div' );
 	container.id = 'stats';
 	container.addEventListener( 'mousedown', function ( event ) { event.preventDefault(); setMode( ++ mode % 2 ) }, false );
-	container.style.cssText = 'width:80px;opacity:0.9;cursor:pointer';
+	container.style.cssText = 'width:100px;opacity:0.9;cursor:pointer';
 
 	var fpsDiv = document.createElement( 'div' );
 	fpsDiv.id = 'fps';
@@ -27,10 +31,10 @@ var Stats = function () {
 
 	var fpsGraph = document.createElement( 'div' );
 	fpsGraph.id = 'fpsGraph';
-	fpsGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0ff';
+	fpsGraph.style.cssText = 'position:relative;width:94px;height:30px;background-color:#0ff';
 	fpsDiv.appendChild( fpsGraph );
 
-	while ( fpsGraph.children.length < 74 ) {
+	while ( fpsGraph.children.length < 94 ) {
 
 		var bar = document.createElement( 'span' );
 		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#113';
@@ -51,10 +55,10 @@ var Stats = function () {
 
 	var msGraph = document.createElement( 'div' );
 	msGraph.id = 'msGraph';
-	msGraph.style.cssText = 'position:relative;width:74px;height:30px;background-color:#0f0';
+	msGraph.style.cssText = 'position:relative;width:94px;height:30px;background-color:#0f0';
 	msDiv.appendChild( msGraph );
 
-	while ( msGraph.children.length < 74 ) {
+	while ( msGraph.children.length < 94 ) {
 
 		var bar = document.createElement( 'span' );
 		bar.style.cssText = 'width:1px;height:30px;float:left;background-color:#131';
@@ -97,34 +101,35 @@ var Stats = function () {
 
 		begin: function () {
 
-			startTime = Date.now();
+			startTime = getTime();
 
 		},
 
 		end: function () {
 
-			var time = Date.now();
+			var time = getTime();
 
-			ms = time - startTime;
+			ms += time - startTime;
 			msMin = Math.min( msMin, ms );
 			msMax = Math.max( msMax, ms );
-
-			msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
-			updateGraph( msGraph, Math.min( 30, 30 - ( ms / 200 ) * 30 ) );
 
 			frames ++;
 
 			if ( time > prevTime + 1000 ) {
 
+				msText.textContent = (ms/frames).toFixed(2) + ' MS (' + msMin.toFixed(0) + '-' + msMax.toFixed(0) + ')';
+				updateGraph( msGraph, Math.min( 30, Math.max( 1, 30 - ( ms / frames / 200 ) * 30 ) ) );
+
 				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
 				fpsMin = Math.min( fpsMin, fps );
 				fpsMax = Math.max( fpsMax, fps );
 
-				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
-				updateGraph( fpsGraph, Math.min( 30, 30 - ( fps / 100 ) * 30 ) );
+				fpsText.textContent = fps.toFixed(1) + ' FPS (' + fpsMin.toFixed(0) + '-' + fpsMax.toFixed(0) + ')';
+				updateGraph( fpsGraph, Math.min( 30, Math.max( 1, 30 - ( fps / 100 ) * 30 ) ) );
 
 				prevTime = time;
 				frames = 0;
+				ms = 0;
 
 			}
 
