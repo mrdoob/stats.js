@@ -11,7 +11,8 @@
 		</style>
 	</head>
 	<body>
-		<script src="../build/stats.min.js"></script>
+		<!-- <script src="../build/stats.min.js"></script> -->
+		<script src="../src/Stats.js"></script>
 		<script>
 
 			var stats = new Stats();
@@ -47,6 +48,12 @@
 				stats.end();
 
 			}, 1000 / 60 );
+
+			setInterval( function () {
+
+				stats.log();	// log to console	
+
+			}, 1000 * 10 );
 
 		</script>
 	</body>
