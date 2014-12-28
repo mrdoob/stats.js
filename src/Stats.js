@@ -136,6 +136,13 @@ var Stats = function () {
 
 			startTime = this.end();
 
+		},
+
+		log: function () {
+
+			console.log(fps + ' FPS (' + fpsMin + '-' + fpsMax + ') ' +
+			            ms + ' MS (' + msMin + '-' + msMax + ')');
+
 		}
 
 	}
