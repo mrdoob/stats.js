@@ -95,13 +95,41 @@ var Stats = function () {
 
 		setMode: setMode,
 
+		isHidden: false,
+
+		show: function() {
+
+			if ( this.isHidden ) {
+
+				container.style.visibility = 'visible';
+				this.isHidden = false;
+
+			}
+
+		},
+
+		hide: function() {
+
+			if (!this.isHidden) {
+
+				container.style.visibility = 'hidden';
+				this.isHidden = true;
+
+			}
+
+		},
+
 		begin: function () {
+
+			if (this.isHidden) return;
 
 			startTime = Date.now();
 
 		},
 
 		end: function () {
+
+			if (this.isHidden) return;
 
 			var time = Date.now();
 
@@ -133,6 +161,8 @@ var Stats = function () {
 		},
 
 		update: function () {
+
+			if (this.isHidden) return;
 
 			startTime = this.end();
 
