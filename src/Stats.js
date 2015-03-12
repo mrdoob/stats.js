@@ -3,13 +3,16 @@
  */
 
 var Stats = function (options) {
+	// Use high resolution timing API, if available
+	window.performance = window.performance || {};
+	performance.now = performance.now || function() { return new Date().getTime(); };
 
 	options = options || {};
 
 	var barHeight = options.barHeight || 30;
 	var bars = options.bars || 74;
 
-	var startTime = Date.now(), prevTime = startTime;
+	var startTime = performance.now(), prevTime = startTime;
 	var ms = 0, msMin = Infinity, msMax = 0;
 	var fps = 0, fpsMin = Infinity, fpsMax = 0;
 	var frames = 0, mode = 0;
@@ -17,12 +20,17 @@ var Stats = function (options) {
 	var container = document.createElement( 'div' );
 	container.id = 'stats';
 	container.addEventListener( 'mousedown', function ( event ) { event.preventDefault(); setMode( ++ mode % 2 ); }, false );
-	container.style.cssText = 'width:' + (bars + 6) + 'px;opacity:0.9;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px;text-align:left';
+	container.style.cssText = 'width:' + (bars + 6) + 'px;opacity:0.9;cursor:pointer;font-family:Consolas,Arial,monospace;font-size:9px;font-weight:bold;line-height:15px;text-align:left';
 
 	var fpsDiv = document.createElement( 'div' );
 	fpsDiv.id = 'fps';
 	fpsDiv.style.cssText = 'padding:0 0 3px 3px;background-color:#002;color:#0ff';
 	container.appendChild( fpsDiv );
+
+	var fpsMinMax = document.createElement( 'div' );
+	fpsMinMax.id = 'fpsTextMinMax';
+	fpsMinMax.style.cssText = 'text-align:right;height:0;padding-right:3px';
+	fpsDiv.appendChild( fpsMinMax );
 
 	var fpsText = document.createElement( 'div' );
 	fpsText.id = 'fpsText';
@@ -46,6 +54,11 @@ var Stats = function (options) {
 	msDiv.id = 'ms';
 	msDiv.style.cssText = 'padding:0 0 3px 3px;background-color:#020;display:none;color:#0f0;';
 	container.appendChild( msDiv );
+
+	var msMinMax = document.createElement( 'div' );
+	msMinMax.id = 'msTextMinMax';
+	msMinMax.style.cssText = 'text-align:right;height:0;padding-right:3px';
+	msDiv.appendChild( msMinMax );
 
 	var msText = document.createElement( 'div' );
 	msText.id = 'msText';
@@ -100,30 +113,32 @@ var Stats = function (options) {
 
 		begin: function () {
 
-			startTime = Date.now();
+			startTime = performance.now();
 
 		},
 
 		end: function () {
 
-			var time = Date.now();
+			var time = performance.now();
 
 			ms = time - startTime;
 			msMin = Math.min( msMin, ms );
 			msMax = Math.max( msMax, ms );
 
-			msText.textContent = ms + ' MS (' + msMin + '-' + msMax + ')';
+			msText.textContent = ms.toFixed(1) + ' MS';
+			msMinMax.textContent = '(' + msMin.toFixed(1) + '-' + msMax.toFixed(1) + ')';
 			updateGraph( msGraph, Math.min( barHeight, barHeight - ( ms / 200 ) * barHeight ) );
 
 			frames ++;
 
 			if ( time > prevTime + 1000 ) {
 
-				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
+				fps = (( frames * 1000 ) / ( time - prevTime )).toFixed(1);
 				fpsMin = Math.min( fpsMin, fps );
 				fpsMax = Math.max( fpsMax, fps );
 
-				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
+				fpsText.textContent = fps + ' FPS';
+				fpsMinMax.textContent = '(' + fpsMin + '-' + fpsMax + ')';
 				updateGraph( fpsGraph, Math.min( barHeight, barHeight - ( fps / 100 ) * barHeight ) );
 
 				prevTime = time;
