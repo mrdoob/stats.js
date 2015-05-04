@@ -4,7 +4,28 @@
 
 var Stats = function () {
 
-	var startTime = Date.now(), prevTime = startTime;
+	var now;
+	if ( performance && performance.now ) {
+
+		now = performance.now.bind( performance );
+
+	} else {
+
+		Date.now = (Date.now || function () {
+
+			return new Date().getTime();
+
+		});
+
+		now = function () {
+
+			return Date.now();
+
+		};
+
+	}
+
+	var startTime = now(), prevTime = startTime;
 	var ms = 0, msMin = Infinity, msMax = 0;
 	var fps = 0, fpsMin = Infinity, fpsMax = 0;
 	var frames = 0, mode = 0;
@@ -97,13 +118,13 @@ var Stats = function () {
 
 		begin: function () {
 
-			startTime = Date.now();
+			startTime = now();
 
 		},
 
 		end: function () {
 
-			var time = Date.now();
+			var time = now();
 
 			ms = time - startTime;
 			msMin = Math.min( msMin, ms );
