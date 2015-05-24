@@ -46,9 +46,11 @@ requestAnimationFrame( update );
 
 ### Bookmarklet ###
 
-Albeit theorically not as accurate the widget can also be easily inserted to **any site** using a bookmarklet.
-[Follow the instructions](http://ricardocabello.com/blog/post/707).
+You can add this code to any page using the following bookmarklet:
 
+```javascript
+javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();stats.domElement.style.cssText='position:fixed;left:0;top:0;z-index:10000';document.body.appendChild(stats.domElement);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})();
+```
 
 ### Change Log ###
 
