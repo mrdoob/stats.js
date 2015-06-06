@@ -91,6 +91,22 @@ var Stats = function () {
 
 	container.appendChild( msDiv );
 
+	// MEM
+
+	if ( performance && performance.memory && performance.memory.totalJSHeapSize ) {
+
+		var memory = performance.memory;
+
+		var mem = 0, memMin = Infinity, memMax = 0;
+
+		var memDiv = createPanel( 'mem', '#f08', '#201' );
+		var memText = memDiv.children[ 0 ];
+		var memGraph = memDiv.children[ 1 ];
+
+		container.appendChild( memDiv );
+
+	}
+
 	//
 
 	setMode( mode );
@@ -133,6 +149,17 @@ var Stats = function () {
 
 				prevTime = time;
 				frames = 0;
+
+				if ( memory !== undefined ) {
+
+					mem = Math.round( performance.memory.usedJSHeapSize * 0.000000954 );
+					memMin = Math.min( memMin, mem );
+					memMax = Math.max( memMax, mem );
+
+					memText.textContent = mem + ' MB (' + memMin + '-' + memMax + ')';
+					updateGraph( memGraph, memory.usedJSHeapSize / memory.totalJSHeapSize );
+
+				}
 
 			}
 
