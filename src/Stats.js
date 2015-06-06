@@ -4,26 +4,7 @@
 
 var Stats = function () {
 
-	var now;
-	if ( performance && performance.now ) {
-
-		now = performance.now.bind( performance );
-
-	} else {
-
-		Date.now = (Date.now || function () {
-
-			return new Date().getTime();
-
-		});
-
-		now = function () {
-
-			return Date.now();
-
-		};
-
-	}
+	var now = ( performance && performance.now ) ? performance.now.bind( performance ) : Date.now;
 
 	var startTime = now(), prevTime = startTime;
 	var ms = 0, msMin = Infinity, msMax = 0;
