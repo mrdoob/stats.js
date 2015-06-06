@@ -40,6 +40,27 @@ var Stats = function () {
 
 	}
 
+	function setMode( value ) {
+
+		var children = container.children;
+
+		for ( var i = 0; i < children.length; i ++ ) {
+
+			children[ i ].style.display = i === value ? 'block' : 'none';
+
+		}
+
+		mode = value;
+
+	}
+
+	function updateGraph( dom, value ) {
+
+		var child = dom.appendChild( dom.firstChild );
+		child.style.height = Math.min( 30, 30 - value * 30 ) + 'px';
+
+	}
+
 	//
 
 	var container = createElement( 'div', 'stats', 'width:80px;opacity:0.9;cursor:pointer' );
@@ -64,32 +85,15 @@ var Stats = function () {
 
 	var ms = 0, msMin = Infinity, msMax = 0;
 
-	var msDiv = createPanel( 'fps', '#0f0', '#020' );
+	var msDiv = createPanel( 'ms', '#0f0', '#020' );
 	var msText = msDiv.children[ 0 ];
 	var msGraph = msDiv.children[ 1 ];
 
 	container.appendChild( msDiv );
 
-	function setMode( value ) {
+	//
 
-		var children = container.children;
-
-		for ( var i = 0; i < children.length; i ++ ) {
-
-			children[ i ].style.display = i === value ? 'block' : 'none';
-
-		}
-
-		mode = value;
-
-	}
-
-	function updateGraph( dom, value ) {
-
-		var child = dom.appendChild( dom.firstChild );
-		child.style.height = Math.min( 30, 30 - value * 30 ) + 'px';
-
-	}
+	setMode( mode );
 
 	return {
 
