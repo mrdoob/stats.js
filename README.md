@@ -35,7 +35,7 @@ var update = function () {
 	// monitored code goes here
 
 	stats.end();
-	
+
 	requestAnimationFrame( update );
 
 };
@@ -54,7 +54,13 @@ javascript:(function(){var script=document.createElement('script');script.onload
 
 ### Change Log ###
 
-2014 08 11 - **r12** (2,310 KB, gzip: 1,087 B)
+2015 06 06 - **r13** (2,052 KB, gzip: 964 B)
+
+* Use `performance.now()` when available. (@ribeirobreno)
+* Reduced code. (@mrdoob)
+
+
+2014 08 11 - **r12** (2,310 KB, gzip: 952 B)
 
 * Browserify support. (@Miha-ha)
 

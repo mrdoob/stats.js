@@ -1,6 +1,6 @@
 {
 	"name": "stats.js",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"homepage": "https://github.com/mrdoob/stats.js",
 	"description": "JavaScript Performance Monitor",
 	"main": "build/stats.min.js",

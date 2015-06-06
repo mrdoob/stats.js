@@ -82,7 +82,7 @@ var Stats = function () {
 
 	return {
 
-		REVISION: 12,
+		REVISION: 13,
 
 		domElement: container,
 
