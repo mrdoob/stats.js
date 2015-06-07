@@ -93,13 +93,11 @@ var Stats = function () {
 
 	// MEM
 
-	if ( performance && performance.memory && performance.memory.totalJSHeapSize ) {
-
-		var memory = performance.memory;
+	if ( performance && performance.memory && performance.memory.usedJSHeapSize ) {
 
 		var mem = 0, memMin = Infinity, memMax = 0;
 
-		var memDiv = createPanel( 'mem', '#f08', '#201' );
+		var memDiv = createPanel( 'mb', '#f08', '#201' );
 		var memText = memDiv.children[ 0 ];
 		var memGraph = memDiv.children[ 1 ];
 
@@ -150,14 +148,14 @@ var Stats = function () {
 				prevTime = time;
 				frames = 0;
 
-				if ( memory !== undefined ) {
+				if ( mem !== undefined ) {
 
 					mem = Math.round( performance.memory.usedJSHeapSize * 0.000000954 );
 					memMin = Math.min( memMin, mem );
 					memMax = Math.max( memMax, mem );
 
 					memText.textContent = mem + ' MB (' + memMin + '-' + memMax + ')';
-					updateGraph( memGraph, memory.usedJSHeapSize / memory.totalJSHeapSize );
+					updateGraph( memGraph, performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit );
 
 				}
 
