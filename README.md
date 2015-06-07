@@ -7,19 +7,21 @@ This class provides a simple info box that will help you monitor your code perfo
 
 * **FPS** Frames rendered in the last second. The higher the number the better.
 * **MS** Milliseconds needed to render a frame. The lower the number the better.
+* **MB** MBytes of allocated memory. (Run Chrome with `--enable-precise-memory-info`)
 
 
 ### Screenshots ###
 
-![stats_js_fps.png](http://mrdoob.github.com/stats.js/assets/stats_js_fps.png)
-![stats_js_ms.png](http://mrdoob.github.com/stats.js/assets/stats_js_ms.png)
+![fps.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/fps.png)
+![ms.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/ms.png)
+![mb.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/mb.png)
 
 
 ### Usage ###
 
 ```javascript
 var stats = new Stats();
-stats.setMode(1); // 0: fps, 1: ms
+stats.setMode( 1 ); // 0: fps, 1: ms, 2: mb
 
 // align top-left
 stats.domElement.style.position = 'absolute';
