@@ -26,13 +26,12 @@ var Stats = function () {
 		text.innerHTML = id.toUpperCase();
 		div.appendChild( text );
 
-		var graph = createElement( 'div', id + 'Graph', 'position:relative;width:74px;height:30px;background:' + fg );
+		var graph = createElement( 'div', id + 'Graph', 'width:74px;height:30px;background:' + fg );
 		div.appendChild( graph );
 
 		for ( var i = 0; i < 74; i ++ ) {
 
-			var bar = createElement( 'span', '', 'width:1px;height:30px;float:left;opacity:0.9;background:' + bg );
-			graph.appendChild( bar );
+			graph.appendChild( createElement( 'span', '', 'width:1px;height:30px;float:left;opacity:0.9;background:' + bg ) );
 
 		}
 
@@ -93,7 +92,7 @@ var Stats = function () {
 
 	// MEM
 
-	if ( performance && performance.memory && performance.memory.usedJSHeapSize ) {
+	if ( performance && performance.memory ) {
 
 		var mem = 0, memMin = Infinity, memMax = 0;
 
@@ -150,12 +149,15 @@ var Stats = function () {
 
 				if ( mem !== undefined ) {
 
-					mem = Math.round( performance.memory.usedJSHeapSize * 0.000000954 );
+					var heapSize = performance.memory.usedJSHeapSize;
+					var heapSizeLimit = performance.memory.jsHeapSizeLimit;
+
+					mem = Math.round( heapSize * 0.000000954 );
 					memMin = Math.min( memMin, mem );
 					memMax = Math.max( memMax, mem );
 
 					memText.textContent = mem + ' MB (' + memMin + '-' + memMax + ')';
-					updateGraph( memGraph, performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit );
+					updateGraph( memGraph, heapSize / heapSizeLimit );
 
 				}
 
