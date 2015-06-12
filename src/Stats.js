@@ -4,6 +4,11 @@
 
 var Stats = function () {
 
+	// AE: Fix for mobile Safari's ReferenceError
+	if (typeof(performance) === 'undefined') {
+		performance = null;
+	}
+
 	var now = ( performance && performance.now ) ? performance.now.bind( performance ) : Date.now;
 
 	var startTime = now(), prevTime = startTime;
