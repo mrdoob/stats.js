@@ -4,12 +4,7 @@
 
 var Stats = function () {
 
-	// AE: Fix for mobile Safari's ReferenceError
-	if (typeof(performance) === 'undefined') {
-		performance = null;
-	}
-
-	var now = ( performance && performance.now ) ? performance.now.bind( performance ) : Date.now;
+	var now = ( self.performance && self.performance.now ) ? self.performance.now.bind( performance ) : Date.now;
 
 	var startTime = now(), prevTime = startTime;
 	var frames = 0, mode = 0;
@@ -97,7 +92,7 @@ var Stats = function () {
 
 	// MEM
 
-	if ( performance && performance.memory ) {
+	if ( self.performance && self.performance.memory ) {
 
 		var mem = 0, memMin = Infinity, memMax = 0;
 
@@ -152,7 +147,7 @@ var Stats = function () {
 				prevTime = time;
 				frames = 0;
 
-				if ( mem !== undefined ) {
+				if ( mem !== undefined && self.performance ) {
 
 					var heapSize = performance.memory.usedJSHeapSize;
 					var heapSizeLimit = performance.memory.jsHeapSizeLimit;
