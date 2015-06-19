@@ -147,7 +147,7 @@ var Stats = function () {
 				prevTime = time;
 				frames = 0;
 
-				if ( mem !== undefined && self.performance ) {
+				if ( mem !== undefined ) {
 
 					var heapSize = performance.memory.usedJSHeapSize;
 					var heapSizeLimit = performance.memory.jsHeapSizeLimit;
