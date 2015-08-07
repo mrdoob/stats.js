@@ -173,7 +173,7 @@ var Stats = function () {
 
 		}
 
-	}
+	};
 
 };
 
