@@ -171,6 +171,12 @@ var Stats = function () {
 
 			startTime = this.end();
 
+		},
+
+		fps: function () {
+
+			return fps;
+
 		}
 
 	};
