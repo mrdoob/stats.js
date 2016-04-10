@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>stats.js - basic example</title>
+		<title>stats.js - custom panel example</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
@@ -15,9 +15,9 @@
 		<script>
 
 			var stats = new Stats();
-			var xPanel = stats.createPanel( 'x', '#ff8', '#221', 'sint', 460 );
-			var yPanel = stats.createPanel( 'y', '#f8f', '#212', 'cost', 460 );
-			stats.setMode( 3 );
+			var xPanel = stats.addPanel( new Stats.Panel( 'x', '#ff8', '#221' ) );
+			var yPanel = stats.addPanel( new Stats.Panel( 'y', '#f8f', '#212' ) );
+			stats.showPanel( 3 );
 
 			document.body.appendChild( stats.domElement );
 
@@ -47,9 +47,10 @@
 
 				}
 
-				xPanel.update(x);
-				yPanel.update(y);
 				stats.end();
+
+				xPanel.update( x, 460 );
+				yPanel.update( y, 460 );
 
 			}, 1000 / 60 );
 

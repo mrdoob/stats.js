@@ -4,149 +4,88 @@
 
 var Stats = function () {
 
-	var now = ( self.performance && self.performance.now ) ? self.performance.now.bind( performance ) : Date.now;
+	var mode = 0;
 
-	var startTime = now(), prevTime = startTime;
-	var frames = 0, mode = 0;
-
-	function createElement( tag, id, css ) {
-
-		var element = document.createElement( tag );
-		element.id = id;
-		element.style.cssText = css;
-		return element;
-
-	}
-
-	function createPanelDiv( id, fg, bg ) {
-
-		var div = createElement( 'div', id, 'padding:0 0 3px 3px;text-align:left;background:' + bg );
-		div.style.display = 'none';
-
-		var text = createElement( 'div', id + 'Text', 'font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px;color:' + fg );
-		text.innerHTML = id.toUpperCase();
-		div.appendChild( text );
-
-		var graph = createElement( 'div', id + 'Graph', 'width:74px;height:30px;background:' + fg );
-		div.appendChild( graph );
-
-		for ( var i = 0; i < 74; i ++ ) {
-
-			graph.appendChild( createElement( 'span', '', 'width:1px;height:30px;float:left;opacity:0.9;background:' + bg ) );
-
-		}
-
-		return div;
-
-	}
-
-	function createPanel( id, fg, bg, displayName, topVal ) {
-		var min = Infinity;
-		var max = 0;
-		var div = createPanelDiv( id, fg, bg );
-		var text = div.children[ 0 ];
-		var graph = div.children[ 1 ];
-		container.appendChild( div );
-		return {
-			div: div,
-			update: function(newVal) {
-				min = Math.min( min, newVal );
-				max = Math.max( max, newVal );
-				text.textContent = ( newVal | 0 ) + ' ' + displayName + ' (' + ( min | 0 ) + '-' + ( max | 0 ) + ')';
-				updateGraph( graph, newVal / topVal );
-			}
-		}
-	}
-
-	function setMode( value ) {
-
-		var children = container.children;
-
-		for ( var i = 0; i < children.length; i ++ ) {
-
-			children[ i ].style.display = i === value ? 'block' : 'none';
-
-		}
-
-		mode = value;
-
-	}
-
-	function updateGraph( dom, value ) {
-
-		var child = dom.appendChild( dom.firstChild );
-		child.style.height = Math.min( 30, 30 - value * 30 ) + 'px';
-
-	}
-
-	//
-
-	var container = createElement( 'div', 'stats', 'width:80px;opacity:0.9;cursor:pointer' );
-	container.addEventListener( 'mousedown', function ( event ) {
+	var container = document.createElement( 'div' );
+	container.style.cssText = 'opacity:0.9;cursor:pointer';
+	container.addEventListener( 'click', function ( event ) {
 
 		event.preventDefault();
-		setMode( ++ mode % container.children.length );
+
+		showPanel( ++ mode % container.children.length );
 
 	}, false );
 
-	// FPS
+	//
 
-	var fpsPanel = createPanel( 'fps', '#0ff', '#002', 'FPS', 100 );
+	function addPanel( panel ) {
 
-	// MS
+		container.appendChild( panel.dom );
+		return panel;
 
-	var msPanel = createPanel( 'ms', '#0f0', '#020', 'MS', 200 );
+	}
 
-	// MEM
+	function showPanel( id ) {
 
-	if ( self.performance && self.performance.memory ) {
+		for ( var i = 0; i < container.children.length; i ++ ) {
 
-		var memPanel = createPanel( 'mb', '#f08', '#201', 'MB', performance.memory.jsHeapSizeLimit );
+			container.children[ i ].style.display = i === id ? 'block' : 'none';
+
+		}
 
 	}
 
 	//
 
-	setMode( mode );
+	var beginTime = ( performance || Date ).now(), prevTime = beginTime, frames = 0;
+
+	var fpsPanel = addPanel( new Stats.Panel( 'FPS', '#0ff', '#002' ) );
+	var msPanel = addPanel( new Stats.Panel( 'MS', '#0f0', '#020' ) );
+
+	if ( self.performance && self.performance.memory ) {
+
+		var memPanel = addPanel( new Stats.Panel( 'MB', '#f08', '#201' ) );
+
+	}
+
+	showPanel( 0 );
 
 	return {
 
-		REVISION: 14,
+		REVISION: 15,
 
 		domElement: container,
 
-		setMode: setMode,
+		addPanel: addPanel,
+		showPanel: showPanel,
 
-		createPanel: createPanel,
+		setMode: showPanel, // backwards compatibility
 
 		begin: function () {
 
-			startTime = now();
+			beginTime = ( performance || Date ).now();
 
 		},
 
 		end: function () {
 
-			var time = now();
-
-			ms = time - startTime;
-			msPanel.update( ms );
-
 			frames ++;
+
+			var time = ( performance || Date ).now();
+
+			msPanel.update( time - beginTime, 200 );
 
 			if ( time > prevTime + 1000 ) {
 
-				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
-				fpsPanel.update( fps );
+				fpsPanel.update( ( frames * 1000 ) / ( time - prevTime ), 100 );
 
 				prevTime = time;
 				frames = 0;
 
 				if ( memPanel !== undefined ) {
 
-					var heapSize = performance.memory.usedJSHeapSize;
-					mem = Math.round( heapSize * 0.000000954 );
-					memPanel.update( mem );
+					var memory = performance.memory;
+					memPanel.update( memory.usedJSHeapSize / 1048576, memory.jsHeapSizeLimit / 1048576 );
 
 				}
 
@@ -158,7 +97,58 @@ var Stats = function () {
 
 		update: function () {
 
-			startTime = this.end();
+			beginTime = this.end();
+
+		}
+
+	};
+
+};
+
+Stats.Panel = function ( name, fg, bg ) {
+
+	var canvas = document.createElement( 'canvas' );
+	canvas.width = 80;
+	canvas.height = 48;
+
+	var context = canvas.getContext( '2d' );
+
+	context.fillStyle = bg;
+	context.fillRect( 0, 0, 80, 48 );
+
+	context.font = 'bold 9px Helvetica,Arial,sans-serif';
+	context.fillStyle = fg;
+	context.fillText( name, 3, 10 );
+	context.fillRect( 3, 15, 74, 30 );
+
+	context.fillStyle = bg;
+	context.globalAlpha = 0.9;
+	context.fillRect( 3, 15, 74, 30 );
+
+	var min = Infinity, max = 0;
+
+	return {
+
+		dom: canvas,
+
+		update: function ( value, maxValue ) {
+
+			min = Math.min( min, value );
+			max = Math.max( max, value );
+
+			context.fillStyle = bg;
+			context.fillRect( 0, 0, 80, 15 );
+			context.fillStyle = fg;
+			context.fillText( ( value | 0 ) + ' ' + name + ' (' + ( min | 0 ) + '-' + ( max | 0 ) + ')', 3, 10 );
+
+			context.drawImage( canvas, 4, 15, 74, 30, 3, 15, 74, 30 );
+
+			context.fillRect( 76, 15, 1, 30 );
+
+			context.fillStyle = bg;
+			context.globalAlpha = 0.9;
+			context.fillRect( 76, 15, 1, 30 - ( ( value / maxValue ) * 30 ) | 0 );
+			context.globalAlpha = 1;
 
 		}
 
