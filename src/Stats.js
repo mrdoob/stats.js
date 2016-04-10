@@ -136,6 +136,7 @@ Stats.Panel = function ( name, fg, bg ) {
 			min = Math.min( min, value );
 			max = Math.max( max, value );
 
+			context.globalAlpha = 1;
 			context.fillStyle = bg;
 			context.fillRect( 0, 0, 80, 15 );
 			context.fillStyle = fg;
@@ -148,7 +149,6 @@ Stats.Panel = function ( name, fg, bg ) {
 			context.fillStyle = bg;
 			context.globalAlpha = 0.9;
 			context.fillRect( 76, 15, 1, 30 - ( ( value / maxValue ) * 30 ) | 0 );
-			context.globalAlpha = 1;
 
 		}
 
