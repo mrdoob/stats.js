@@ -18,9 +18,10 @@ var Stats = function () {
 
 	}
 
-	function createPanel( id, fg, bg ) {
+	function createPanelDiv( id, fg, bg ) {
 
 		var div = createElement( 'div', id, 'padding:0 0 3px 3px;text-align:left;background:' + bg );
+		div.style.display = 'none';
 
 		var text = createElement( 'div', id + 'Text', 'font-family:Helvetica,Arial,sans-serif;font-size:9px;font-weight:bold;line-height:15px;color:' + fg );
 		text.innerHTML = id.toUpperCase();
@@ -37,6 +38,24 @@ var Stats = function () {
 
 		return div;
 
+	}
+
+	function createPanel( id, fg, bg, displayName, topVal ) {
+		var min = Infinity;
+		var max = 0;
+		var div = createPanelDiv( id, fg, bg );
+		var text = div.children[ 0 ];
+		var graph = div.children[ 1 ];
+		container.appendChild( div );
+		return {
+			div: div,
+			update: function(newVal) {
+				min = Math.min( min, newVal );
+				max = Math.max( max, newVal );
+				text.textContent = ( newVal | 0 ) + ' ' + displayName + ' (' + ( min | 0 ) + '-' + ( max | 0 ) + ')';
+				updateGraph( graph, newVal / topVal );
+			}
+		}
 	}
 
 	function setMode( value ) {
@@ -72,35 +91,17 @@ var Stats = function () {
 
 	// FPS
 
-	var fps = 0, fpsMin = Infinity, fpsMax = 0;
-
-	var fpsDiv = createPanel( 'fps', '#0ff', '#002' );
-	var fpsText = fpsDiv.children[ 0 ];
-	var fpsGraph = fpsDiv.children[ 1 ];
-
-	container.appendChild( fpsDiv );
+	var fpsPanel = createPanel( 'fps', '#0ff', '#002', 'FPS', 100 );
 
 	// MS
 
-	var ms = 0, msMin = Infinity, msMax = 0;
-
-	var msDiv = createPanel( 'ms', '#0f0', '#020' );
-	var msText = msDiv.children[ 0 ];
-	var msGraph = msDiv.children[ 1 ];
-
-	container.appendChild( msDiv );
+	var msPanel = createPanel( 'ms', '#0f0', '#020', 'MS', 200 );
 
 	// MEM
 
 	if ( self.performance && self.performance.memory ) {
 
-		var mem = 0, memMin = Infinity, memMax = 0;
-
-		var memDiv = createPanel( 'mb', '#f08', '#201' );
-		var memText = memDiv.children[ 0 ];
-		var memGraph = memDiv.children[ 1 ];
-
-		container.appendChild( memDiv );
+		var memPanel = createPanel( 'mb', '#f08', '#201', 'MB', performance.memory.jsHeapSizeLimit );
 
 	}
 
@@ -116,6 +117,8 @@ var Stats = function () {
 
 		setMode: setMode,
 
+		createPanel: createPanel,
+
 		begin: function () {
 
 			startTime = now();
@@ -127,37 +130,23 @@ var Stats = function () {
 			var time = now();
 
 			ms = time - startTime;
-			msMin = Math.min( msMin, ms );
-			msMax = Math.max( msMax, ms );
-
-			msText.textContent = ( ms | 0 ) + ' MS (' + ( msMin | 0 ) + '-' + ( msMax | 0 ) + ')';
-			updateGraph( msGraph, ms / 200 );
+			msPanel.update( ms );
 
 			frames ++;
 
 			if ( time > prevTime + 1000 ) {
 
 				fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
-				fpsMin = Math.min( fpsMin, fps );
-				fpsMax = Math.max( fpsMax, fps );
-
-				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
-				updateGraph( fpsGraph, fps / 100 );
+				fpsPanel.update( fps );
 
 				prevTime = time;
 				frames = 0;
 
-				if ( mem !== undefined ) {
+				if ( memPanel !== undefined ) {
 
 					var heapSize = performance.memory.usedJSHeapSize;
-					var heapSizeLimit = performance.memory.jsHeapSizeLimit;
-
 					mem = Math.round( heapSize * 0.000000954 );
-					memMin = Math.min( memMin, mem );
-					memMax = Math.max( memMax, mem );
-
-					memText.textContent = mem + ' MB (' + memMin + '-' + memMax + ')';
-					updateGraph( memGraph, heapSize / heapSizeLimit );
+					memPanel.update( mem );
 
 				}
 
