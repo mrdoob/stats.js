@@ -33,6 +33,8 @@ var Stats = function () {
 
 		}
 
+		mode = id;
+
 	}
 
 	//
@@ -125,7 +127,7 @@ Stats.Panel = function ( name, fg, bg ) {
 	context.globalAlpha = 0.9;
 	context.fillRect( 3, 15, 74, 30 );
 
-	var min = Infinity, max = 0;
+	var min = Infinity, max = 0, round = Math.round;
 
 	return {
 
@@ -140,7 +142,7 @@ Stats.Panel = function ( name, fg, bg ) {
 			context.fillStyle = bg;
 			context.fillRect( 0, 0, 80, 15 );
 			context.fillStyle = fg;
-			context.fillText( ( value | 0 ) + ' ' + name + ' (' + ( min | 0 ) + '-' + ( max | 0 ) + ')', 3, 10 );
+			context.fillText( round( value ) + ' ' + name + ' (' + round( min ) + '-' + round( max ) + ')', 3, 10 );
 
 			context.drawImage( canvas, 4, 15, 74, 30, 3, 15, 74, 30 );
 
@@ -148,7 +150,7 @@ Stats.Panel = function ( name, fg, bg ) {
 
 			context.fillStyle = bg;
 			context.globalAlpha = 0.9;
-			context.fillRect( 76, 15, 1, 30 - ( ( value / maxValue ) * 30 ) | 0 );
+			context.fillRect( 76, 15, 1, 30 - round( ( value / maxValue ) * 30 ) );
 
 		}
 
