@@ -21,7 +21,7 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ```javascript
 var stats = new Stats();
-stats.setMode( 1 ); // 0: fps, 1: ms, 2: mb
+stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 
 // align top-left
 stats.domElement.style.position = 'absolute';
