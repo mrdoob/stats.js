@@ -7,7 +7,7 @@ var Stats = function () {
 	var mode = 0;
 
 	var container = document.createElement( 'div' );
-	container.style.cssText = 'cursor:pointer;opacity:0.9';
+	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
 	container.addEventListener( 'click', function ( event ) {
 
 		event.preventDefault();
@@ -55,12 +55,10 @@ var Stats = function () {
 
 		REVISION: 16,
 
-		domElement: container,
+		dom: container,
 
 		addPanel: addPanel,
 		showPanel: showPanel,
-
-		setMode: showPanel, // backwards compatibility
 
 		begin: function () {
 
@@ -100,7 +98,12 @@ var Stats = function () {
 
 			beginTime = this.end();
 
-		}
+		},
+
+		// Backwards Compatibility
+
+		domElement: container,
+		setMode: showPanel
 
 	};
 
