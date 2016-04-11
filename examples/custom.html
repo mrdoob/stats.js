@@ -18,8 +18,7 @@
 			var xPanel = stats.addPanel( new Stats.Panel( 'x', '#ff8', '#221' ) );
 			var yPanel = stats.addPanel( new Stats.Panel( 'y', '#f8f', '#212' ) );
 			stats.showPanel( 3 );
-
-			document.body.appendChild( stats.domElement );
+			document.body.appendChild( stats.dom );
 
 			var canvas = document.createElement( 'canvas' );
 			canvas.width = 512;
@@ -28,9 +27,12 @@
 
 			var context = canvas.getContext( '2d' );
 			context.fillStyle = 'rgba(127,0,255,0.05)';
-			setInterval( function () {
 
-				var time = Date.now() * 0.001;
+			var test = [];
+
+			function animate() {
+
+				var time = performance.now() / 1000;
 
 				context.clearRect( 0, 0, 512, 512 );
 
@@ -52,7 +54,11 @@
 				xPanel.update( x, 460 );
 				yPanel.update( y, 460 );
 
-			}, 1000 / 60 );
+				requestAnimationFrame( animate );
+
+			}
+
+			animate();
 
 		</script>
 	</body>

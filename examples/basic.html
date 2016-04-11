@@ -16,7 +16,7 @@
 
 			var stats = new Stats();
 			stats.showPanel( 1 );
-			document.body.appendChild( stats.domElement );
+			document.body.appendChild( stats.dom );
 
 			var canvas = document.createElement( 'canvas' );
 			canvas.width = 512;
@@ -25,9 +25,10 @@
 
 			var context = canvas.getContext( '2d' );
 			context.fillStyle = 'rgba(127,0,255,0.05)';
-			setInterval( function () {
 
-				var time = Date.now() * 0.001;
+			function animate() {
+
+				var time = performance.now() / 1000;
 
 				context.clearRect( 0, 0, 512, 512 );
 
@@ -46,7 +47,11 @@
 
 				stats.end();
 
-			}, 1000 / 60 );
+				requestAnimationFrame( animate );
+
+			}
+
+			animate();
 
 		</script>
 	</body>

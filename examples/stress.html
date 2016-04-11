@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>stats.js - stress test</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="../build/stats.min.js"></script>
+		<script>
+
+			var array = [];
+
+			for ( var i = 0; i < 500; i ++ ) {
+
+				var stats = new Stats();
+				stats.dom.style.position = 'relative';
+				stats.dom.style.float = 'left';
+				document.body.appendChild( stats.dom );
+
+				array.push( stats );
+
+			}
+
+			function animate() {
+
+				for ( var i = 0; i < array.length; i ++ ) {
+
+					var stats = array[ i ];
+					stats.update();
+
+				}
+
+				requestAnimationFrame( animate );
+
+			}
+
+			animate();
+
+		</script>
+	</body>
+</html>
