@@ -13,10 +13,10 @@ This class provides a simple info box that will help you monitor your code perfo
 
 ### Screenshots ###
 
-![fps.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/fps.png)
-![ms.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/ms.png)
-![mb.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/mb.png)
-![custom.png](https://cdn.rawgit.com/mrdoob/stats.js/master/files/custom.png)
+![fps.png](https://raw.githubusercontent.com/mrdoob/stats.js/master/files/fps.png)
+![ms.png](https://raw.githubusercontent.com/mrdoob/stats.js/master/files/ms.png)
+![mb.png](https://raw.githubusercontent.com/mrdoob/stats.js/master/files/mb.png)
+![custom.png](https://raw.githubusercontent.com/mrdoob/stats.js/master/files/custom.png)
 
 
 ### Usage ###
@@ -26,7 +26,7 @@ var stats = new Stats();
 stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
 
-var update = function () {
+function animate() {
 
 	stats.begin();
 
@@ -34,11 +34,11 @@ var update = function () {
 
 	stats.end();
 
-	requestAnimationFrame( update );
+	requestAnimationFrame( animate );
 
-};
+}
 
-requestAnimationFrame( update );
+requestAnimationFrame( animate );
 ```
 
 
