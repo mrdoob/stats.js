@@ -1,6 +1,6 @@
 {
   "name": "stats.js",
-  "version": "0.0.16",
+  "version": "0.16.0",
   "description": "JavaScript Performance Monitor",
   "main": "build/stats.min.js",
   "directories": {
