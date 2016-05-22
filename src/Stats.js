@@ -1,7 +1,18 @@
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-
+(function (root, factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['stats'], factory);
+	} else if (typeof exports === 'object') {
+		// Node, CommonJS-like
+		module.exports = factory();
+	} else {
+		// Browser globals (root is window)
+		root.Stats = factory();
+	}
+}(this, function() {
 var Stats = function () {
 
 	var mode = 0;
@@ -168,8 +179,5 @@ Stats.Panel = function ( name, fg, bg ) {
 
 };
 
-if ( typeof module === 'object' ) {
-
-	module.exports = Stats;
-
-}
+return Stats;
+}));
