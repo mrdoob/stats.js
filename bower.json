@@ -2,7 +2,7 @@
 	"name": "stats.js",
 	"homepage": "https://github.com/mrdoob/stats.js",
 	"description": "JavaScript Performance Monitor",
-	"main": "build/stats.min.js",
+	"main": "src/Stats.js",
 	"keywords": [
 		"stats",
 		"statistics",
