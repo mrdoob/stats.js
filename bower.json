@@ -13,7 +13,6 @@
 	"license": "MIT",
 	"ignore": [
 		"examples",
-		"src",
 		"utils",
 		"LICENSE"
 	]
