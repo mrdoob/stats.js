@@ -6,6 +6,10 @@
   "directories": {
     "example": "examples"
   },
+  "files": [
+    "build",
+    "src"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
