@@ -27,5 +27,11 @@
   "bugs": {
     "url": "https://github.com/mrdoob/stats.js/issues"
   },
-  "homepage": "https://github.com/mrdoob/stats.js"
+  "homepage": "https://github.com/mrdoob/stats.js",
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-rename": "1.2.2",
+    "gulp-uglify": "1.5.4",
+    "gulp-watch": "4.3.9"
+  }
 }
