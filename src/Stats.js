@@ -6,6 +6,7 @@ var Stats = function () {
 
 	var mode = 0;
 
+	var panelTable = [];
 	var container = document.createElement( 'div' );
 	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
 	container.addEventListener( 'click', function ( event ) {
@@ -20,6 +21,8 @@ var Stats = function () {
 	function addPanel( panel ) {
 
 		container.appendChild( panel.dom );
+		panelTable.push( panel );
+
 		return panel;
 
 	}
@@ -100,6 +103,16 @@ var Stats = function () {
 
 		},
 
+		reset: function ( resetGraph ) {
+
+			for ( var i = 0; i < panelTable.length; i ++ ) {
+
+				panelTable[ i ].reset( resetGraph );
+
+			}
+
+		},
+
 		// Backwards Compatibility
 
 		domElement: container,
@@ -142,6 +155,28 @@ Stats.Panel = function ( name, fg, bg ) {
 	return {
 
 		dom: canvas,
+
+		reset: function ( resetGraph ) {
+
+			min = Infinity;
+			max = 0;
+
+			if ( resetGraph ) {
+
+				context.fillStyle = bg;
+				context.fillRect( 0, 0, WIDTH, HEIGHT );
+				
+				context.fillStyle = fg;
+				context.fillText( name, TEXT_X, TEXT_Y );
+				context.fillRect( GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT );
+				
+				context.fillStyle = bg;
+				context.globalAlpha = 0.9;
+				context.fillRect( GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT );
+
+			}
+
+		},
 
 		update: function ( value, maxValue ) {
 
