@@ -65,6 +65,12 @@ var Stats = function () {
 			beginTime = ( performance || Date ).now();
 
 		},
+		
+		getFPS: function () {
+			
+			return fps;
+			
+    		},
 
 		end: function () {
 
