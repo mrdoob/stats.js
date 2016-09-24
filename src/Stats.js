@@ -168,8 +168,4 @@ Stats.Panel = function ( name, fg, bg ) {
 
 };
 
-if ( typeof module === 'object' ) {
-
-	module.exports = Stats;
-
-}
+export { Stats as default };
