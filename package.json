@@ -13,7 +13,7 @@
   "scripts": {
     "build": "rollup -c",
     "build-uglify": "rollup -c && uglifyjs build/stats.js -cm --preamble \"// stats.js - http://github.com/mrdoob/stats.js\" > build/stats.min.js",
-    "build-closure": "rollup -c && java -jar utils/compiler/compiler.jar --language_in=ECMASCRIPT5_STRICT --js build/stats.js --js_output_file build/stats.min.js",
+    "build-closure": "rollup -c && java -jar utils/compiler/closure-compiler-v20160713.jar --language_in=ECMASCRIPT5_STRICT --js build/stats.js --js_output_file build/stats.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
