@@ -2,7 +2,7 @@
   "name": "stats.js",
   "version": "0.17.0",
   "description": "JavaScript Performance Monitor",
-  "main": "src/Stats.js",
+  "main": "build/stats.js",
   "repository": "mrdoob/stats.js",
   "directories": {
     "example": "examples"
