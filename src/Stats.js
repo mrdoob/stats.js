@@ -60,6 +60,8 @@ var Stats = function () {
 		addPanel: addPanel,
 		showPanel: showPanel,
 
+		_fps: null,
+
 		begin: function () {
 
 			beginTime = ( performance || Date ).now();
@@ -75,8 +77,8 @@ var Stats = function () {
 			msPanel.update( time - beginTime, 200 );
 
 			if ( time > prevTime + 1000 ) {
-
-				fpsPanel.update( ( frames * 1000 ) / ( time - prevTime ), 100 );
+				this._fps = ( frames * 1000 ) / ( time - prevTime );
+				fpsPanel.update( this._fps, 100 );
 
 				prevTime = time;
 				frames = 0;
@@ -98,6 +100,10 @@ var Stats = function () {
 
 			beginTime = this.end();
 
+		},
+
+		getFrameRate: function () {
+			return this._fps;
 		},
 
 		// Backwards Compatibility
