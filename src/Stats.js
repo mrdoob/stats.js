@@ -162,6 +162,12 @@ Stats.Panel = function ( name, fg, bg ) {
 			context.globalAlpha = 0.9;
 			context.fillRect( GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, round( ( 1 - ( value / maxValue ) ) * GRAPH_HEIGHT ) );
 
+		},
+
+		fps: function () {
+
+			return fps;
+
 		}
 
 	};
