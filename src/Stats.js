@@ -74,7 +74,7 @@ var Stats = function () {
 
 			msPanel.update( time - beginTime, 200 );
 
-			if ( time > prevTime + 1000 ) {
+			if ( time >= prevTime + 1000 ) {
 
 				fpsPanel.update( ( frames * 1000 ) / ( time - prevTime ), 100 );
 
