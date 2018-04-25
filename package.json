@@ -1,10 +1,10 @@
 {
-  "name": "stats.js",
+  "name": "stats",
   "version": "0.17.0",
   "description": "JavaScript Performance Monitor",
   "main": "build/stats.js",
-  "jsnext:main": "build/three.module.js",
-  "module": "build/three.module.js",
+  "jsnext:main": "build/stats.module.js",
+  "module": "build/stats.module.js",
   "repository": "mrdoob/stats.js",
   "directories": {
     "example": "examples"
