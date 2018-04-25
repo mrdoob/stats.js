@@ -3,6 +3,8 @@
   "version": "0.17.0",
   "description": "JavaScript Performance Monitor",
   "main": "build/stats.js",
+  "jsnext:main": "build/three.module.js",
+  "module": "build/three.module.js",
   "repository": "mrdoob/stats.js",
   "directories": {
     "example": "examples"
@@ -29,7 +31,7 @@
   },
   "homepage": "https://github.com/mrdoob/stats.js",
   "devDependencies": {
-    "rollup": "^0.36.0",
+    "rollup": "^0.57.1",
     "uglifyjs": "^2.4.10"
   }
 }
