@@ -19,6 +19,11 @@ This class provides a simple info box that will help you monitor your code perfo
 ![custom.png](https://raw.githubusercontent.com/mrdoob/stats.js/master/files/custom.png)
 
 
+### Installation ###
+```bash
+npm install stats.js
+```
+
 ### Usage ###
 
 ```javascript
