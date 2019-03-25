@@ -105,7 +105,7 @@ var Stats = function () {
 		
 		dispose: function () {
 		
-			container.removeEventListener( 'click', clickHandler, false );
+			container.removeEventListener( 'click', clickHandler );
 			container.remove();
 		
 		},
