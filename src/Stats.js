@@ -17,7 +17,7 @@ let conf = {
 const CANVAS_CONTEXT = '2d';
 
 var Stats = function (customConf) {
-  if ( customConf != undefined ) {
+  if ( customConf !== undefined ) {
     Object.assign(conf, customConf);
   }
 
