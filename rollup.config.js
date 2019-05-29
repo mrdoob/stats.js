@@ -1,6 +1,14 @@
 export default {
   entry: 'src/Stats.js',
-  dest: 'build/stats.js',
-  moduleName: 'Stats',
-  format: 'umd'
+  targets: [
+    {
+      format: 'umd',
+      moduleName: 'Stats',
+      dest: 'build/stats.js'
+    },
+    {
+      format: 'es',
+      dest: 'build/stats.module.js'
+    }
+  ]
 };

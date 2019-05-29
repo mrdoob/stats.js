@@ -1,9 +1,3 @@
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.Stats = factory());
-}(this, (function () { 'use strict';
-
 /**
  * @author mrdoob / http://mrdoob.com/
  */
@@ -174,6 +168,4 @@ Stats.Panel = function ( name, fg, bg ) {
 
 };
 
-return Stats;
-
-})));
+export default Stats;
