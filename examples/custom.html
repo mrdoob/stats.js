@@ -11,12 +11,21 @@
 		</style>
 	</head>
 	<body>
-		<script src="../build/stats.min.js"></script>
+		<script src="../build/stats.js"></script>
 		<script>
 
 			var stats = new Stats();
-			var xPanel = stats.addPanel( new Stats.Panel( 'x', '#ff8', '#221' ) );
-			var yPanel = stats.addPanel( new Stats.Panel( 'y', '#f8f', '#212' ) );
+			var xPanel = stats.addPanel( new Stats.Panel( 'x', '#ff8', '#221' ) ); // 3
+			var yPanel = stats.addPanel( new Stats.Panel( 'y', '#f8f', '#212' ) ); // 4
+			var currentPanel = 3;
+
+			stats.dom.style.cssText = 'position:fixed;bottom:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
+			stats.dom.addEventListener('click', e => {
+				e.stopPropagation();
+				currentPanel = ( currentPanel == 3 ) ? 4 : 3;
+				stats.showPanel( currentPanel );
+			}, true);
+
 			stats.showPanel( 3 );
 			document.body.appendChild( stats.dom );
 
