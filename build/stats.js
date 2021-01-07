@@ -118,7 +118,7 @@ var Stats = function () {
 Stats.Panel = function ( name, fg, bg ) {
 
 	var min = Infinity, max = 0, round = Math.round;
-	var PR = round( window.devicePixelRatio || 1 );
+	var PR = round( window.devicePixelRatio ) || 1;
 
 	var WIDTH = 80 * PR, HEIGHT = 48 * PR,
 			TEXT_X = 3 * PR, TEXT_Y = 2 * PR,
