@@ -46,6 +46,13 @@ function animate() {
 requestAnimationFrame( animate );
 ```
 
+### Usage placement ###
+```javascript
+var stats = new Stats({
+	placement: 'top-left' // top-left | top-right | bottom-left | bottom-right
+});
+```
+
 
 ### Bookmarklet ###
 
