@@ -2,12 +2,19 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Stats = function () {
+var Stats = function ({ placement = 'top-left' } = {}) {
 
 	var mode = 0;
+	var placementList = {
+		'top-left': 'top:0;left:0;',
+		'top-right': 'top:0;right:0;',
+		'bottom-left': 'bottom:0;left:0;',
+		'bottom-right': 'bottom:0;right:0;',
+	};
 
 	var container = document.createElement( 'div' );
-	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
+	var containerCssText = 'position:fixed;cursor:pointer;opacity:0.9;z-index:10000;' + placementList[placement];
+	container.style.cssText = containerCssText;
 	container.addEventListener( 'click', function ( event ) {
 
 		event.preventDefault();
