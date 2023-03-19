@@ -36,9 +36,13 @@ var Stats = function () {
 
 	}
 
+	function now() {
+		return (performance && performance.now) ? performance.now() : Date.now();
+	}
+
 	//
 
-	var beginTime = ( performance || Date ).now(), prevTime = beginTime, frames = 0;
+	var beginTime = now(), prevTime = beginTime, frames = 0;
 
 	var fpsPanel = addPanel( new Stats.Panel( 'FPS', '#0ff', '#002' ) );
 	var msPanel = addPanel( new Stats.Panel( 'MS', '#0f0', '#020' ) );
@@ -62,7 +66,7 @@ var Stats = function () {
 
 		begin: function () {
 
-			beginTime = ( performance || Date ).now();
+			beginTime = now();
 
 		},
 
@@ -70,7 +74,7 @@ var Stats = function () {
 
 			frames ++;
 
-			var time = ( performance || Date ).now();
+			var time = now();
 
 			msPanel.update( time - beginTime, 200 );
 
