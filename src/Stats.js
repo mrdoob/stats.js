@@ -2,12 +2,22 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-var Stats = function () {
+/**
+ * @param {Object} [opts]
+ * @param {Object} [opts.container] - container DOM node
+ * @param {Object} [opts.cssText] - This style string will be applied to the conatiner. Use a falsey value (except `undefined`) to skip set.
+ */
+var Stats = function (opts) {
+	opts = opts || {};
+	opts.container = opts.container || document.createElement( 'div' );
+	opts.cssText = opts.cssText !== undefined ? opts.cssText : 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
 
 	var mode = 0;
 
-	var container = document.createElement( 'div' );
-	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
+	var container = opts.container;
+	if (opts.cssText) {
+		container.style.cssText = opts.cssText;
+	}
 	container.addEventListener( 'click', function ( event ) {
 
 		event.preventDefault();
