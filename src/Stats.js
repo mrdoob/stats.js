@@ -7,6 +7,7 @@ var Stats = function () {
 	var mode = 0;
 
 	var container = document.createElement( 'div' );
+	container.setAttribute("id", "stats.js");
 	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
 	container.addEventListener( 'click', function ( event ) {
 
