@@ -1,65 +1,62 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>stats.js - custom panel example</title>
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
-	</head>
-	<body>
-		<script src="../build/stats.min.js"></script>
-		<script>
+  <head>
+    <title>stats.js - custom panel example</title>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <style>
+      body {
+        margin: 0px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../build/stats.min.js"></script>
+    <script>
+      var stats = new Stats();
+      var xPanel = stats.addPanel(new Stats.Panel("x", "#ff8", "#221"));
+      var yPanel = stats.addPanel(new Stats.Panel("y", "#f8f", "#212"));
+      stats.showPanel(3);
+      document.body.appendChild(stats.dom);
 
-			var stats = new Stats();
-			var xPanel = stats.addPanel( new Stats.Panel( 'x', '#ff8', '#221' ) );
-			var yPanel = stats.addPanel( new Stats.Panel( 'y', '#f8f', '#212' ) );
-			stats.showPanel( 3 );
-			document.body.appendChild( stats.dom );
+      var canvas = document.createElement("canvas");
+      canvas.width = 512;
+      canvas.height = 512;
+      document.body.appendChild(canvas);
 
-			var canvas = document.createElement( 'canvas' );
-			canvas.width = 512;
-			canvas.height = 512;
-			document.body.appendChild( canvas );
+      var context = canvas.getContext("2d");
+      context.fillStyle = "rgba(127,0,255,0.05)";
 
-			var context = canvas.getContext( '2d' );
-			context.fillStyle = 'rgba(127,0,255,0.05)';
+      var test = [];
 
-			var test = [];
+      function animate() {
+        var time = performance.now() / 1000;
 
-			function animate() {
+        context.clearRect(0, 0, 512, 512);
 
-				var time = performance.now() / 1000;
+        stats.begin();
 
-				context.clearRect( 0, 0, 512, 512 );
+        for (var i = 0; i < 2000; i++) {
+          var x = Math.cos(time + i * 0.01) * 196 + 256;
+          var y = Math.sin(time + i * 0.01234) * 196 + 256;
 
-				stats.begin();
+          context.beginPath();
+          context.arc(x, y, 10, 0, Math.PI * 2, true);
+          context.fill();
+        }
 
-				for ( var i = 0; i < 2000; i ++ ) {
+        stats.end();
 
-					var x = Math.cos( time + i * 0.01 ) * 196 + 256;
-					var y = Math.sin( time + i * 0.01234 ) * 196 + 256;
+        xPanel.update(x, 460);
+        yPanel.update(y, 460);
 
-					context.beginPath();
-					context.arc( x, y, 10, 0, Math.PI * 2, true );
-					context.fill();
+        requestAnimationFrame(animate);
+      }
 
-				}
-
-				stats.end();
-
-				xPanel.update( x, 460 );
-				yPanel.update( y, 460 );
-
-				requestAnimationFrame( animate );
-
-			}
-
-			animate();
-
-		</script>
-	</body>
+      animate();
+    </script>
+  </body>
 </html>
