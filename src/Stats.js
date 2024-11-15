@@ -8,12 +8,15 @@ var Stats = function () {
 
 	var container = document.createElement( 'div' );
 	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
-	container.addEventListener( 'click', function ( event ) {
+	
+	var clickHandler = function ( event ) {
 
 		event.preventDefault();
 		showPanel( ++ mode % container.children.length );
 
-	}, false );
+	}
+	
+	container.addEventListener( 'click', clickHandler, false );
 
 	//
 
@@ -98,6 +101,13 @@ var Stats = function () {
 
 			beginTime = this.end();
 
+		},
+		
+		dispose: function () {
+		
+			container.removeEventListener( 'click', clickHandler );
+			container.remove();
+		
 		},
 
 		// Backwards Compatibility
